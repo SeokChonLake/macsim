@@ -116,6 +116,11 @@ param<L3_LINE_SIZE, l3_line_size, int, 64>
 param<L3_NUM_BANK,  l3_num_bank,  int, 16>
 param<L3_LATENCY,   l3_latency,   int, 25>
 
+/* Cache replacement policy */
+param<L3_REPL, l3_repl, string, LRU>
+/* Cache parition policy */
+param<L3_PARTITION, l3_partition, string, none>
+
 param<DCACHE_INFINITE_PORT, dcache_infinite_port, bool, false>
 
 
