@@ -243,7 +243,8 @@ macsim_src = [
   'src/trace_gen_a64.cc',
   'src/trace_gen_x86.cc',
   'src/cs_disas.cc',
-  'src/resource.cc'
+  'src/resource.cc',
+  'src/ucp.cc'
 ]
 
 

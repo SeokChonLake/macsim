@@ -540,3 +540,8 @@ void cache_c::print_info(int id)
     cout << "CACHE::L" << id << " cpu: " << m_num_cpu_line << " gpu: " << m_num_gpu_line << "\n";
   }
 }
+
+void update_cache_policy(Counter m_cycle)
+{
+    return ;
+}

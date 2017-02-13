@@ -295,6 +295,11 @@ class cache_c
     Counter find_min_lru (int set);
 
     /**
+     * Periodical cache policy engine
+     */
+    virtual void update_cache_policy(Counter m_cycle);
+
+    /**
      * Print out cache information
      * @param id - cache id
      */

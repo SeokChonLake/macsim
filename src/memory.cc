@@ -451,6 +451,12 @@ dcache_data_s* dcu_c::access_cache(Addr addr, Addr *line_addr, bool update, int 
   return (dcache_data_s*)m_cache->access_cache(addr, line_addr, update, appl_id);
 }
 
+// Cache controller's periodically process
+void dcu_c::update_cache_policy(Counter m_cycle)
+{
+    m_cache->update_cache_policy(Counter m_cycle);
+}
+
 
 // search a prefetch request in input queue.
 mem_req_s* dcu_c::search_pref_in_queue()
@@ -760,6 +766,8 @@ void dcu_c::run_a_cycle(bool pll_lock)
     receive_packet();
 
   ++m_cycle;
+
+  update_cache_policy();
 }
 
 

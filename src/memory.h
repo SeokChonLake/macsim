@@ -235,6 +235,11 @@ class dcu_c
     dcache_data_s* access_cache(Addr addr, Addr *line_addr, bool update, int appl_id);
 
     /**
+     * Peridocal cache controller's policy engine
+     */
+    void update_cache_policy(Counter m_cycle);
+
+    /**
      * Search a prefetch request from queues
      */
     mem_req_s* search_pref_in_queue();
@@ -522,6 +527,14 @@ class memory_c
      */
     void flush_prefetch(int core_id);
 
+    /*! \fn Counter check_heartbeat(bool final)
+     *  \brief Function to check if final heartbeat for memories 
+     *  \param final - TRUE of FALSE
+     *  \return Counter - Count of some stats with final heartbeat
+     */
+    void check_heartbeat(bool final);
+
+    
 
 
   protected:

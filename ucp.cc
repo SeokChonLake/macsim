@@ -6,6 +6,8 @@
 
 #include "all_knobs.h"
 
+#include <algorithm>
+
 #define DEBUG(args...) _DEBUG(*m_simBase->m_knobs->KNOB_DEBUG_CACHE_LIB, ## args)
 #define DEBUG_MEM(args...) _DEBUG(*m_simBase->m_knobs->KNOB_DEBUG_MEM_TRACE, ## args)
 
@@ -101,6 +103,11 @@ ucp_cache_c::~ucp_cache_c()
 	delete[] m_num_utility;
 }
 
+static bool comp_func(uns32 i, uns32 j)
+{
+    return (i > j);
+}
+
 void update_cache_on_access(Addr tag, int set, int appl_id)
 {
 	cache_set_c** ATD_set = m_ATD_set[appl_id];
@@ -118,7 +125,7 @@ void update_cache_on_access(Addr tag, int set, int appl_id)
 	*line_addr = base_cache_line (addr);
 	
     // Increment the access counter
-    m_num_access[appl_id];
+    m_num_access[appl_id]++;
 
 	// Walk through the ATD set
 	for (int ii = 0; ii < m_assoc; ++ii) {
@@ -153,6 +160,7 @@ void update_cache_on_access(Addr tag, int set, int appl_id)
 	// Initialize the cache line
 	ATD_initialize_cache_line(line, tag, addr, set, false);
 }
+
 
 /*
 void update_line_on_hit(cache_entry_c* line, int set, int appl_id)
@@ -261,8 +269,20 @@ void calculate_ways(void)
     int balance = m_assoc;
     int* max_mu = new int[m_num_cores];
     int* blk_reqs = new int[m_num_cores];
+
     /* Set up the access, missess, hits tables */
-    
+    for (int ii = 0; ii < m_num_cores; ++ii)
+        std::sort(std::begin(m_num_hits[ii]), std::end(m_num_hits[ii]));
+    for (int ii = 0; ii < m_num_cores; ++ii)
+    {
+        int hit_sum = 0;
+        for (int jj = 0; jj < m_assoc; ++jj)
+        {
+            hit_sum += m_num_hits[ii][jj];
+            m_num_misses[ii][jj] = m_num_access[ii] - hit_sum; 
+        }
+    }
+
     memset(m_allocations, 0, m_num_cores * sizeof(int));
     while (balance) {
         
@@ -278,6 +298,26 @@ void calculate_ways(void)
         balance -= blk_reqs[winner];
     }
 
+    for (int ii = 0; ii < m_num_cores; ++ii)
+    {
+        memset(m_num_hits[ii], 0, m_assoc * sizeof(uns32));
+        memset(m_num_misses[ii], 0, m_assoc * sizeof(uns32));
+    }
+    memset(m_num_access, 0, m_num_cores * sizeof(uns32));
+
     delete[] max_mu;
     delete[] blk_reqs;
+}
+
+void update_cache_policy(Counter m_cycles)
+{
+    static uns32 check = 0;
+    
+    uns32 = m_cycles / 5000000;
+    if (m_cycles >= check++)
+    {
+        cout << "Caclulate ways @ " << m_cycles << endl;
+        caclulate_ways(void);
+    }
+
 }

@@ -10,7 +10,6 @@
 #define UCP_H
 
 #include <string>
-#include <vector>
 
 #include "cache.h"
 
@@ -40,7 +39,8 @@ class ucp_cache_c: public cache_c
 		double get_max_mu(int appl_id, int alloc, int balance, int *blk_reqs);
 		double get_mu_value(int appl_id, int a, int b);
 		void calculate_ways(void);	
-		
+	    void update_cache_policy(Counter m_cycles);
+
 	protected:
 		int			        m_num_cores;	/**< Number of cores */
 		cache_set_c***		m_ATD_set;	    /**< Auxiliary tag directories */
