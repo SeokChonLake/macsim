@@ -310,10 +310,11 @@ void ucp_cache_c::update_cache_policy(Counter m_cycles)
     static uns32 check = 0;
     
     uns32 check_point = m_cycles / 5000000;
-    if (m_cycles >= check++)
+    if (check_point >= check)
     {
         cout << "Caclulate ways @ " << m_cycles << endl;
         calculate_ways();
+        check++;
     }
 
 }
