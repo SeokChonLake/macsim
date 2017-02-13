@@ -37,21 +37,21 @@ class ucp_cache_c: public cache_c
 		cache_entry_c* find_replacement_line(int set, int appl_id);
 		void ATD_initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int set_id, bool skip);
 
-		double get_max_mu();
-		double get_mu_value();
-		void calculate_ways();
-		
+		double get_max_mu(int appl_id, int alloc, int balance, int *blk_reqs);
+		double get_mu_value(int appl_id, int a, int b);
+		void calculate_ways(void);	
 		
 	protected:
-		int			m_num_cores;	/**< Number of cores */
-		cache_set_c***		m_ATD_set;	/**< Auxiliary tag directories */
-		uns32**			m_num_misses;	/**< Number of misses per core */
-		uns32**			m_num_hits;	/**< Number of hits per core */
-		uns32**			m_utility;	/**< Utility */
-		UMON_Type		m_umon_type;	/**< Type of UMON */
-		int*			m_allocations;	/**< Allocated ways per core */
-		int*			m_occupied;	/**< Occupied ways per core */
-		int			m_num_sampling  /**< Number of sampling sets */
+		int			        m_num_cores;	/**< Number of cores */
+		cache_set_c***		m_ATD_set;	    /**< Auxiliary tag directories */
+        uns32*              m_num_access;   /**< Number of accesses per core */
+        uns32**			    m_num_misses;	/**< Number of misses per core */
+		uns32**			    m_num_hits;	    /**< Number of hits per core */
+		uns32**			    m_utility;	    /**< Utility */
+		UMON_Type		    m_umon_type;	/**< Type of UMON */
+		int*			    m_allocations;	/**< Allocated ways per core */
+		int*			    m_occupied;	    /**< Occupied ways per core */
+		int			        m_num_sampling  /**< Number of sampling sets */
 };
 
 #endif

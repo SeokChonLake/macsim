@@ -38,6 +38,7 @@ ucp_cache_c::ucp_cache_c(string name, int num_set, int assoc, int line_size, int
 	switch(m_umon_type)
 	{
 		case UMON_LOCAL:
+            m_num_sampling = num_set;
 			break;
 		case UMON_GLOBAL:
 			m_num_sampling = 32;
@@ -50,6 +51,7 @@ ucp_cache_c::ucp_cache_c(string name, int num_set, int assoc, int line_size, int
 	m_allocations = new int[m_num_cores];
 	m_occupied = new int[m_num_cores];
 
+	m_num_access = new uns32[m_num_cores];
 	m_num_misses = new uns32*[m_num_cores];
 	m_num_hits = new uns32*[m_num_cores];
 	m_num_utility = new uns32*[m_num_cores];
@@ -64,6 +66,7 @@ ucp_cache_c::ucp_cache_c(string name, int num_set, int assoc, int line_size, int
 	{
 		m_allocations[ii] = m_num_sets / m_num_cores;
 		m_occupied[ii] = 0;
+        m_num_access[ii] = 0;
 
 		for (int jj = 0; jj < m_assoc; ++jj)
 		{
@@ -114,11 +117,14 @@ void update_cache_on_access(Addr tag, int set, int appl_id)
 	find_tag_and_set(addr, &tag, &set);
 	*line_addr = base_cache_line (addr);
 	
+    // Increment the access counter
+    m_num_access[appl_id];
+
 	// Walk through the ATD set
 	for (int ii = 0; ii < m_assoc; ++ii) {
 		// For each line in based on associativity
 		cache_entry_c * line = &(m_ATD[set]->m_entry[ii]);
-
+        
 		// Check for matching tag and validity
 		if (line->m_valid && line->m_tag == tag) {
 			// If hit, increment the hit counter
@@ -227,4 +233,51 @@ void ATD_initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int
 	ins_line->m_pref             = false;
 	ins_line->m_skip             = skip;
 	ins_line->m_appl_id          = appl_id;
+}
+
+double get_max_mu(int appl_id, int alloc, int balance, int *blk_reqs)
+{
+    double max_mu = 0;
+    
+    for(int ii = 1; ii <= balance; ii++) {
+        int mu = get_mu_value(appl_id, alloc, alloc+ii);
+        if(mu > max_mu)
+        {
+            max_mu = mu; 
+            *blk_reqs = ii;
+        }
+    }
+    return max_mu;
+}
+
+double get_mu_value(int appl_id, int a, int b)
+{
+    double mu = m_num_misses[appl_id][a] - m_num_misses[appl_id][b];
+    return mu/(b - a);
+}
+
+void calculate_ways(void)
+{
+    int balance = m_assoc;
+    int* max_mu = new int[m_num_cores];
+    int* blk_reqs = new int[m_num_cores];
+    /* Set up the access, missess, hits tables */
+    
+    memset(m_allocations, 0, m_num_cores * sizeof(int));
+    while (balance) {
+        
+        for (int ii = 0; ii < m_num_cores; ++ii) {
+            int alloc = m_allocations[ii];
+            max_mu[ii] = get_max_mu(ii, alloc, balance, &blk_reqs[ii]);
+        }
+        int winner = 0;
+        for (int ii = 1; ii < m_num_cores; ++ii)
+            if (max_mu[ii] > max_mu[winner])
+                winner = ii;
+        m_allocations[winner] += blk_reqs[winner];
+        balance -= blk_reqs[winner];
+    }
+
+    delete[] max_mu;
+    delete[] blk_reqs;
 }
