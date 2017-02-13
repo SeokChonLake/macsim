@@ -41,6 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "assert_macros.h"
 #include "cache.h"
+#include "ucp.h"
 #include "core.h"
 #include "debug_macros.h"
 #include "dram.h"
@@ -222,10 +223,18 @@ cache_c *default_llc(macsim_c* m_simBase)
       interleaving = *m_simBase->m_knobs->KNOB_DRAM_ROWBUFFER_SIZE;
     }
   }
-
+#if 0
   cache_c* llc = new cache_c("llc_default", *KNOB(KNOB_L3_NUM_SET), *KNOB(KNOB_L3_ASSOC),
       *KNOB(KNOB_L3_LINE_SIZE), sizeof(dcache_data_s), *KNOB(KNOB_L3_NUM_BANK),
       false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase);
+#endif
+// Quick hack for regression test 
+// TODO: construct the llc as the knob option
+  cache_c* llc = new ucp_cache_c("llc_default", *KNOB(KNOB_L3_NUM_SET), *KNOB(KNOB_L3_ASSOC),
+      *KNOB(KNOB_L3_LINE_SIZE), sizeof(dcache_data_s), *KNOB(KNOB_L3_NUM_BANK),
+      false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase, UMON_GLOBAL);
+
+
   return llc;
 }
 
