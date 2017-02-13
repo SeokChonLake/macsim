@@ -42,8 +42,7 @@ class rrip_cache_c: public cache_c
 		void update_cache_on_access(Addr tag, int set, int appl_id);
 		cache_entry_c* find_replacement_line(int set, int appl_id);
 	    void update_cache_policy(Counter m_cycles);
-        cache_entry_c* find_replacement_SRRIP(int set, int appl_id);
-        cache_entry_c* find_replacement_BRRIP(int set, int appl_id);
+        void initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int appl_id, bool gpuline, int set_id, bool skip);
 
         Policy_Type determine_policy(void);
         void psel_change(int inc_or_dec);
@@ -52,10 +51,11 @@ class rrip_cache_c: public cache_c
         int                 m_rrpv_len;           /**< Length of rrpv */
         uns32               m_psel[4];         /**< Policy selector */
 		int			        m_num_cores;	/**< Number of cores */
-        Policy_Type*         m_pstate;       /**< Policy state per set */
+        Policy_Type*        m_pstate;       /**< Policy state per set */
         SDM_Type            m_SDM_type;     /**< Type of Set Dueling Monitor */
         int                 m_num_leader_sets; /**< Number of learder sets */
         double              m_epsilon;      /**< Epsilon value for BRRIP */
+        
 };
 
 #endif
