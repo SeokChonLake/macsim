@@ -541,7 +541,7 @@ void cache_c::print_info(int id)
   }
 }
 
-void update_cache_policy(Counter m_cycle)
+void cache_c::update_cache_policy(Counter m_cycle)
 {
     return ;
 }

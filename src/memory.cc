@@ -454,7 +454,7 @@ dcache_data_s* dcu_c::access_cache(Addr addr, Addr *line_addr, bool update, int 
 // Cache controller's periodically process
 void dcu_c::update_cache_policy(Counter m_cycle)
 {
-    m_cache->update_cache_policy(Counter m_cycle);
+    m_cache->update_cache_policy(m_cycle);
 }
 
 
@@ -767,7 +767,7 @@ void dcu_c::run_a_cycle(bool pll_lock)
 
   ++m_cycle;
 
-  update_cache_policy();
+  update_cache_policy(m_cycle);
 }
 
 

@@ -1,5 +1,5 @@
 #include "assert_macros.h"
-#include "tags/ucp.h"
+#include "ucp.h"
 #include "utils.h"
 
 #include "debug_macros.h"
@@ -20,10 +20,10 @@ ucp_cache_c::ucp_cache_c(string name, int num_set, int assoc, int line_size, int
 		  num_tiles, interleave_factor, simBase)
 {
 	// Allocating memory for Auxiliary Tag Directory for every other cores
-	m_ATD_set = new cache_set_c**[n_num_cores];
+	m_ATD_set = new cache_set_c**[m_num_cores];
 	for (int ii = 0; ii < m_num_cores; ++ii) {
 		m_ATD_set[ii] = new cache_set_c*[m_num_sets];
-		for (int jj = 0; jj < m_num_sets; ++j)
+		for (int jj = 0; jj < m_num_sets; ++jj)
 		{
 			m_ATD_set[ii][jj] = new cache_set_c(m_assoc);
 			for (int kk = 0; kk < assoc; ++kk) 
@@ -56,11 +56,11 @@ ucp_cache_c::ucp_cache_c(string name, int num_set, int assoc, int line_size, int
 	m_num_access = new uns32[m_num_cores];
 	m_num_misses = new uns32*[m_num_cores];
 	m_num_hits = new uns32*[m_num_cores];
-	m_num_utility = new uns32*[m_num_cores];
+	m_utility = new uns32*[m_num_cores];
 	for(int ii = 0; ii < m_num_cores; ii++) {
-		m_num_misses[ii] = new int[m_assoc];
-		m_num_hits[ii] = new int[m_assoc];
-		m_utility[ii] = new int[m_assoc];
+		m_num_misses[ii] = new uns32[m_assoc];
+		m_num_hits[ii] = new uns32[m_assoc];
+		m_utility[ii] = new uns32[m_assoc];
 	}
 
 	// Initializing 
@@ -79,28 +79,27 @@ ucp_cache_c::ucp_cache_c(string name, int num_set, int assoc, int line_size, int
 	}
 }
 
-ucp_cache_c::~ucp_cache_c()
-	: ~cache_c()
+ucp_cache_c::~ucp_cache_c()// : ~cache_c()
 {
-	for (int ii = 0; ii < m_num_cores; ++i)
-	{
-		for (int jj = 0; jj < m_num_sets; ++jj)
-			delete[] m_ATD_set[ii][jj];
-		delete[] m_ATD_set[ii];
-	}
+    for (int ii = 0; ii < m_num_cores; ++ii)
+    {
+        for (int jj = 0; jj < m_num_sets; ++jj)
+            delete[] m_ATD_set[ii][jj];
+        delete[] m_ATD_set[ii];
+    }
 
-	delete[] m_allocations;
-	delete[] m_occupied;
+    delete[] m_allocations;
+    delete[] m_occupied;
 
-	for (int ii = 0; ii < m_num_cores; ++ii) 
-	{
-		delete[] m_num_misses[ii];
-		delete[] m_num_hits[ii];
-		delete[] m_utility[ii];
-	}
-	delete[] m_num_misses;
-	delete[] m_num_hits;
-	delete[] m_num_utility;
+    for (int ii = 0; ii < m_num_cores; ++ii) 
+    {
+        delete[] m_num_misses[ii];
+        delete[] m_num_hits[ii];
+        delete[] m_utility[ii];
+    }
+    delete[] m_num_misses;
+    delete[] m_num_hits;
+    delete[] m_utility;
 }
 
 static bool comp_func(uns32 i, uns32 j)
@@ -108,21 +107,19 @@ static bool comp_func(uns32 i, uns32 j)
     return (i > j);
 }
 
-void update_cache_on_access(Addr tag, int set, int appl_id)
+void ucp_cache_c::update_cache_on_access(Addr addr, int set, int appl_id)
 {
 	cache_set_c** ATD_set = m_ATD_set[appl_id];
 
 	if (m_cache_by_pass)
-	    return NULL;
+	    return ;
 
-	Addr tag;
-	int set;
+    Addr tag;
 	int i = 0;
 	int lru_ind = 0;
 	Counter lru_time = MAX_INT;
 
 	find_tag_and_set(addr, &tag, &set);
-	*line_addr = base_cache_line (addr);
 	
     // Increment the access counter
     m_num_access[appl_id]++;
@@ -130,19 +127,19 @@ void update_cache_on_access(Addr tag, int set, int appl_id)
 	// Walk through the ATD set
 	for (int ii = 0; ii < m_assoc; ++ii) {
 		// For each line in based on associativity
-		cache_entry_c * line = &(m_ATD[set]->m_entry[ii]);
+		cache_entry_c * line = &(ATD_set[set]->m_entry[ii]);
         
 		// Check for matching tag and validity
 		if (line->m_valid && line->m_tag == tag) {
 			// If hit, increment the hit counter
 			m_num_hits[appl_id][ii]++;
-			return NULL;
+			return ;
 		}
 	}
 
 	// If miss incurred, find victim and replace the entry based on the policy
 	while (i < m_assoc) {
-		cache_entry_c* line = &(ATD_set[set]->m_entry[ii]);
+		cache_entry_c* line = &(ATD_set[set]->m_entry[i]);
 		// If free entry found, return it
 		if (!line->m_valid) {
 			lru_ind = i;
@@ -158,7 +155,7 @@ void update_cache_on_access(Addr tag, int set, int appl_id)
 	}
 
 	// Initialize the cache line
-	ATD_initialize_cache_line(line, tag, addr, set, false);
+	ATD_initialize_cache_line(&(ATD_set[set]->m_entry[lru_ind]), tag, addr, set, false);
 }
 
 
@@ -182,7 +179,7 @@ void update_set_on_replacement(Addr tag, int appl_id, int set_id, bool gpuline)
 // than the number of blocks allocated to the application, then the LRU block
 // among all the blocks that do not belong to the application is evicted.
 // Otherwise, the LRU block among all the blocks of the miss-causing application is evicted.
-cache_entry_c* find_replacement_line(int set, int appl_id)
+cache_entry_c* ucp_cache_c::find_replacement_line(int set, int appl_id)
 {
 	int lru_ind = -1;
 	Counter lru_time = MAX_INT;
@@ -213,7 +210,7 @@ cache_entry_c* find_replacement_line(int set, int appl_id)
 			{
 				if (appl_id == line->m_appl_id) //victim cannot be from miss-causing apps, 
 					continue;
-				else if (m_occupied[line->m_appl_id] < m_allocation[line->m_appl_id]) // victim cannot be from other less occupied apps's entry
+				else if (m_occupied[line->m_appl_id] < m_allocations[line->m_appl_id]) // victim cannot be from other less occupied apps's entry
 					continue;
 			}
 			else	// find victim entry from miss_causing applications 
@@ -221,7 +218,7 @@ cache_entry_c* find_replacement_line(int set, int appl_id)
 				if (appl_id != line->m_appl_id) // find victim only from miss-causing apps
 				       continue;	
 			}
-			lru_ind  = i;
+			lru_ind  = ii;
 			lru_time = line->m_last_access_time;
 		}
 	}
@@ -231,7 +228,7 @@ cache_entry_c* find_replacement_line(int set, int appl_id)
 	return &(m_set[set]->m_entry[lru_ind]);
 }
 
-void ATD_initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int set_id, bool skip)
+void ucp_cache_c::ATD_initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int set_id, bool skip)
 {
 	ins_line->m_valid            = true;
 	ins_line->m_tag              = tag;
@@ -240,10 +237,9 @@ void ATD_initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int
 	ins_line->m_last_access_time = CYCLE;
 	ins_line->m_pref             = false;
 	ins_line->m_skip             = skip;
-	ins_line->m_appl_id          = appl_id;
 }
 
-double get_max_mu(int appl_id, int alloc, int balance, int *blk_reqs)
+double ucp_cache_c::get_max_mu(int appl_id, int alloc, int balance, int *blk_reqs)
 {
     double max_mu = 0;
     
@@ -258,13 +254,13 @@ double get_max_mu(int appl_id, int alloc, int balance, int *blk_reqs)
     return max_mu;
 }
 
-double get_mu_value(int appl_id, int a, int b)
+double ucp_cache_c::get_mu_value(int appl_id, int a, int b)
 {
     double mu = m_num_misses[appl_id][a] - m_num_misses[appl_id][b];
     return mu/(b - a);
 }
 
-void calculate_ways(void)
+void ucp_cache_c::calculate_ways(void)
 {
     int balance = m_assoc;
     int* max_mu = new int[m_num_cores];
@@ -272,7 +268,7 @@ void calculate_ways(void)
 
     /* Set up the access, missess, hits tables */
     for (int ii = 0; ii < m_num_cores; ++ii)
-        std::sort(std::begin(m_num_hits[ii]), std::end(m_num_hits[ii]));
+        std::sort(m_num_hits[ii], m_num_hits[ii] + m_assoc, std::greater<uns32>());
     for (int ii = 0; ii < m_num_cores; ++ii)
     {
         int hit_sum = 0;
@@ -309,15 +305,15 @@ void calculate_ways(void)
     delete[] blk_reqs;
 }
 
-void update_cache_policy(Counter m_cycles)
+void ucp_cache_c::update_cache_policy(Counter m_cycles)
 {
     static uns32 check = 0;
     
-    uns32 = m_cycles / 5000000;
+    uns32 check_point = m_cycles / 5000000;
     if (m_cycles >= check++)
     {
         cout << "Caclulate ways @ " << m_cycles << endl;
-        caclulate_ways(void);
+        calculate_ways();
     }
 
 }

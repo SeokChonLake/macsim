@@ -23,11 +23,12 @@ typedef enum
 class ucp_cache_c: public cache_c
 {
 	public:
-		ucp_cache_c(string name, int num_set, int assoc, int line_size, int data_size, int bank_num,
+        ucp_cache_c(string name, int num_set, int assoc, int line_size, int data_size, int bank_num,
 			    bool cache_by_pass, int core_id, Cache_Type cache_type_info, bool enable_partition,
-			    int num_tiles, int interleave_factor, macsim_c* simBase);
+			    int num_tiles, int interleave_factor, macsim_c* simBase,
+                UMON_Type umonType);
 	
-		~ucp_cache_c();
+        virtual ~ucp_cache_c();
 			
 		void update_cache_on_access(Addr tag, int set, int appl_id);
 //		void update_line_on_hit(cache_entry_c* line, int set, int appl_id);
@@ -40,8 +41,8 @@ class ucp_cache_c: public cache_c
 		double get_mu_value(int appl_id, int a, int b);
 		void calculate_ways(void);	
 	    void update_cache_policy(Counter m_cycles);
-
-	protected:
+    
+    protected:
 		int			        m_num_cores;	/**< Number of cores */
 		cache_set_c***		m_ATD_set;	    /**< Auxiliary tag directories */
         uns32*              m_num_access;   /**< Number of accesses per core */
@@ -51,7 +52,7 @@ class ucp_cache_c: public cache_c
 		UMON_Type		    m_umon_type;	/**< Type of UMON */
 		int*			    m_allocations;	/**< Allocated ways per core */
 		int*			    m_occupied;	    /**< Occupied ways per core */
-		int			        m_num_sampling  /**< Number of sampling sets */
+		int			        m_num_sampling;  /**< Number of sampling sets */
 };
 
 #endif
