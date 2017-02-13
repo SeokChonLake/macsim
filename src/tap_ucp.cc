@@ -1,17 +1,17 @@
 #include "assert_macros.h"
-#include "ucp.h"
+#include "tap_ucp.h"
 #include "utils.h"
 
 #include "debug_macros.h"
 
 #include "all_knobs.h"
-
+#include "retire.h"
 #include <algorithm>
 
 #define DEBUG(args...) _DEBUG(*m_simBase->m_knobs->KNOB_DEBUG_CACHE_LIB, ## args)
 #define DEBUG_MEM(args...) _DEBUG(*m_simBase->m_knobs->KNOB_DEBUG_MEM_TRACE, ## args)
 
-ucp_cache_c::ucp_cache_c(string name, int num_set, int assoc, int line_size, int data_size, int bank_num,
+tap_ucp_cache_c::tap_ucp_cache_c(string name, int num_set, int assoc, int line_size, int data_size, int bank_num,
 			 bool cache_by_pass, int core_id, Cache_Type cache_type_info, bool enable_partition,
 			 int num_tiles, int interleave_factor, macsim_c* simBase,
 			 UMON_Type umonType)
@@ -77,9 +77,41 @@ ucp_cache_c::ucp_cache_c(string name, int num_set, int assoc, int line_size, int
 			m_utility[ii][jj] = 0;
 		}
 	}
+
+    // For TAP
+    m_core_type = new CORE_Type[m_num_cores];
+    m_core_policy_type = new Core_Policy_Type[m_num_cores];
+    int leader_count = 2;
+    for (int ii = 0; ii < m_num_cores; ii++)
+    {
+        m_core_policy_type[ii] = LRU;
+        string type_name = m_simBase->m_core_pointers[ii]->get_core_type();
+        if (type_name.compare("x86") == 0)
+            m_core_type[ii] = CPU;
+        else if (type_name.compare("ptx") == 0)
+        {
+            if (leader_count)
+            {
+                m_core_type[ii] = GPGPU_LEADER;
+                if (leader_count == 2) 
+                    m_core_policy_type[ii] = LIP;
+                m_leaders[--leader_count] = ii;
+            }
+            else
+            {
+                m_core_type[ii] = GPGPU_FOLLOWER;
+                m_core_policy_type[ii] = LIP; // maybe?
+            }
+        }
+        //TODO: ACCELERATOR
+        
+        UCP_Mask = 0;
+        memset(m_inst_count, 0, 2 * sizeof(Counter));
+        memset(m_cycle_count, 0, 2 * sizeof(Counter));
+    }
 }
 
-ucp_cache_c::~ucp_cache_c()// : ~cache_c()
+tap_ucp_cache_c::~tap_ucp_cache_c()// : ~cache_c()
 {
     for (int ii = 0; ii < m_num_cores; ++ii)
     {
@@ -100,6 +132,9 @@ ucp_cache_c::~ucp_cache_c()// : ~cache_c()
     delete[] m_num_misses;
     delete[] m_num_hits;
     delete[] m_utility;
+
+    delete[] m_core_type;
+    delete[] m_core_policy_type;
 }
 
 static bool comp_func(uns32 i, uns32 j)
@@ -107,7 +142,7 @@ static bool comp_func(uns32 i, uns32 j)
     return (i > j);
 }
 
-void ucp_cache_c::update_cache_on_access(Addr addr, int set, int appl_id)
+void tap_ucp_cache_c::update_cache_on_access(Addr addr, int set, int appl_id)
 {
 	cache_set_c** ATD_set = m_ATD_set[appl_id];
 
@@ -179,7 +214,7 @@ void update_set_on_replacement(Addr tag, int appl_id, int set_id, bool gpuline)
 // than the number of blocks allocated to the application, then the LRU block
 // among all the blocks that do not belong to the application is evicted.
 // Otherwise, the LRU block among all the blocks of the miss-causing application is evicted.
-cache_entry_c* ucp_cache_c::find_replacement_line(int set, int appl_id)
+cache_entry_c* tap_ucp_cache_c::find_replacement_line(int set, int appl_id)
 {
 	int lru_ind = -1;
 	Counter lru_time = MAX_INT;
@@ -228,7 +263,7 @@ cache_entry_c* ucp_cache_c::find_replacement_line(int set, int appl_id)
 	return &(m_set[set]->m_entry[lru_ind]);
 }
 
-void ucp_cache_c::ATD_initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int set_id, bool skip)
+void tap_ucp_cache_c::ATD_initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int set_id, bool skip)
 {
 	ins_line->m_valid            = true;
 	ins_line->m_tag              = tag;
@@ -239,7 +274,35 @@ void ucp_cache_c::ATD_initialize_cache_line(cache_entry_c *ins_line, Addr tag, A
 	ins_line->m_skip             = skip;
 }
 
-double ucp_cache_c::get_max_mu(int appl_id, int alloc, int balance, int *blk_reqs)
+void tap_ucp_cache_c::initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int appl_id, bool gpuline, int set_id, bool skip)
+{
+	ins_line->m_valid            = true;
+	ins_line->m_tag              = tag;
+	ins_line->m_base             = (addr & ~m_offset_mask);
+	ins_line->m_access_counter   = 0;
+	ins_line->m_last_access_time = CYCLE;
+	ins_line->m_pref             = false;
+	ins_line->m_skip             = skip;
+
+    ins_line->m_appl_id          = appl_id;
+    ins_line->m_gpuline          = gpuline;
+
+    if(gpuline) {
+        ++m_num_gpu_line;
+        ++m_set[set_id]->m_num_gpu_line;
+    }
+    else
+    {
+        ++m_num_cpu_line;
+        ++m_set[set_id]->m_num_cpu_line;
+    }
+
+    // Core sampling:: first gpu core uses policy 1(LRU), second gpu core uses policy 2 (LIP)
+    if(m_core_policy_type[appl_id] == LIP)
+        ins_line->m_last_access_time = 1;
+    
+}
+double tap_ucp_cache_c::get_max_mu(int appl_id, int alloc, int balance, int *blk_reqs)
 {
     double max_mu = 0;
     
@@ -254,13 +317,13 @@ double ucp_cache_c::get_max_mu(int appl_id, int alloc, int balance, int *blk_req
     return max_mu;
 }
 
-double ucp_cache_c::get_mu_value(int appl_id, int a, int b)
+double tap_ucp_cache_c::get_mu_value(int appl_id, int a, int b)
 {
     double mu = m_num_misses[appl_id][a] - m_num_misses[appl_id][b];
     return mu/(b - a);
 }
 
-void ucp_cache_c::calculate_ways(void)
+void tap_ucp_cache_c::calculate_ways(void)
 {
     int balance = m_assoc;
     int* max_mu = new int[m_num_cores];
@@ -279,10 +342,42 @@ void ucp_cache_c::calculate_ways(void)
         }
     }
 
+    uns32 sum_access = 0;
+    uns32 max_cpu_access = 0;
+    int XSRATIO = 1;
+    for (int ii = 0; ii < m_num_cores; ++ii)
+    {
+        if (m_core_type[ii] == GPGPU_LEADER || m_core_type[ii] == GPGPU_FOLLOWER)
+            sum_access += m_num_access[ii];
+        else {
+            if (max_cpu_access < m_num_access[ii])
+                max_cpu_access = m_num_access[ii];
+        }
+    }
+
+    if (max_cpu_access * 10 < sum_access)
+        XSRATIO = sum_access / max_cpu_access;
+
+
     memset(m_allocations, 0, m_num_cores * sizeof(int));
+
+    //TAP-UCP begin
+    if (XSRATIO > 1)
+        for (int ii = 0; ii < m_num_cores; ++ii)
+        {
+            if (m_core_type[ii] == GPGPU_LEADER || m_core_type[ii] == GPGPU_FOLLOWER)
+                m_num_access[ii] /= XSRATIO;
+        }
+    //TAP-UCP end
+
     while (balance) {
         
         for (int ii = 0; ii < m_num_cores; ++ii) {
+            //TAP-UCP begin
+            if(m_core_type[ii] == GPGPU_LEADER || m_core_type[ii] == GPGPU_FOLLOWER)
+                if(UCP_Mask)
+                    continue;
+            //TAP-UCP end
             int alloc = m_allocations[ii];
             max_mu[ii] = get_max_mu(ii, alloc, balance, &blk_reqs[ii]);
         }
@@ -305,13 +400,46 @@ void ucp_cache_c::calculate_ways(void)
     delete[] blk_reqs;
 }
 
-void ucp_cache_c::update_cache_policy(Counter m_cycles)
+void tap_ucp_cache_c::update_cache_policy(Counter m_cycles)
 {
     static uns32 check = 0;
     
+    double leaders_cpi[2];
+
     uns32 check_point = m_cycles / 5000000;
     if (check_point >= check)
     {
+        // calculate current interval's cpi
+        for (int i = 0; i < 2; i++) {
+            m_inst_count[i] = (m_simBase->m_core_pointers[m_leaders[i]]->get_retire()->get_total_insts_retired()
+                    - m_inst_count[i]);
+            m_cycle_count[i] = (m_simBase->m_core_pointers[m_leaders[i]]->get_cycle_count() 
+                    - m_cycle_count[i]);
+            leaders_cpi[i] = (double)(m_cycle_count[i] / m_inst_count[i]);
+        }
+
+        double cpi_delta = leaders_cpi[0] - leaders_cpi[1];
+        if (cpi_delta < 0) 
+            cpi_delta *= -1; 
+
+        if(cpi_delta * 20 < leaders_cpi[0] || cpi_delta * 20 < leaders_cpi[1])
+            UCP_Mask = 1; // caching gpgpu application is not effective
+        else
+            UCP_Mask = 0;
+
+        if (UCP_Mask) // caching is not effective, following cache-against policy
+        {
+            for (int ii = 0; ii < m_num_cores; ii++)
+                if(m_core_type[ii] == GPGPU_FOLLOWER)
+                    m_core_policy_type[ii] = LIP;
+        }
+        else    // caching is effective, following cache-frinedly policy
+        {
+            for (int ii = 0; ii < m_num_cores; ii++)
+                if(m_core_type[ii] == GPGPU_FOLLOWER)
+                    m_core_policy_type[ii] = LRU;
+        }
+
         cout << "Caclulate ways @ " << m_cycles << endl;
         calculate_ways();
         check++;

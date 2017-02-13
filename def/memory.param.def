@@ -121,6 +121,9 @@ param<L3_REPL, l3_repl, string, LRU>
 /* Cache parition policy */
 param<L3_PARTITION, l3_partition, string, none>
 
+// Core Sampling
+param<ENABLE_L3_CORE_SAMPL, enable_l3_core_sampl, bool, false>
+
 param<DCACHE_INFINITE_PORT, dcache_infinite_port, bool, false>
 
 

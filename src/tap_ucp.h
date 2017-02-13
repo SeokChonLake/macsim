@@ -1,17 +1,23 @@
 /************************************************************
- * File		: ucp.h
+ * File		: tap_ucp.h
  * Author	:
  * Data		: 
  * SVN		:
  * Description	:
  * ***********************************************************/
 
-#ifndef UCP_H
-#define UCP_H
+#ifndef TAP_UCP_H
+#define TAP_UCP_H
 
 #include <string>
 
 #include "cache.h"
+
+typedef enum
+{
+    LRU         = 0,
+    LIP         = 1
+} Core_Policy_Type;
 
 typedef enum
 {
@@ -20,22 +26,28 @@ typedef enum
 	UMON_DSS	= 2
 } UMON_Type;
 
-class ucp_cache_c: public cache_c
+typedef enum
+{
+    CPU                 = 0,
+    GPGPU_LEADER        = 1,
+    GPGPU_FOLLOWER      = 2,
+    ACCEL               = 3
+} CORE_Type;
+
+class tap_ucp_cache_c: public cache_c
 {
 	public:
-        ucp_cache_c(string name, int num_set, int assoc, int line_size, int data_size, int bank_num,
+        tap_ucp_cache_c(string name, int num_set, int assoc, int line_size, int data_size, int bank_num,
 			    bool cache_by_pass, int core_id, Cache_Type cache_type_info, bool enable_partition,
 			    int num_tiles, int interleave_factor, macsim_c* simBase,
                 UMON_Type umonType);
 	
-        virtual ~ucp_cache_c();
+        virtual ~tap_ucp_cache_c();
 			
 		void update_cache_on_access(Addr tag, int set, int appl_id);
-//		void update_line_on_hit(cache_entry_c* line, int set, int appl_id);
-//		void update_cache_on_miss(int set_id, int appl_id);
-//		void update_set_on_replacement(Addr tag, int appl_id, int set_id, bool gpuline);
 		cache_entry_c* find_replacement_line(int set, int appl_id);
 		void ATD_initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int set_id, bool skip);
+        void initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr addr, int appl_id, bool gpuline, int set_id, bool skip);
 
 		double get_max_mu(int appl_id, int alloc, int balance, int *blk_reqs);
 		double get_mu_value(int appl_id, int a, int b);
@@ -53,6 +65,14 @@ class ucp_cache_c: public cache_c
 		int*			    m_allocations;	/**< Allocated ways per core */
 		int*			    m_occupied;	    /**< Occupied ways per core */
 		int			        m_num_sampling;  /**< Number of sampling sets */
+        CORE_Type*          m_core_type;    /**< Type of cores */
+        Core_Policy_Type*    m_core_policy_type;
+        int                 UCP_Mask;
+        int                 m_leaders[2];
+
+        Counter             m_inst_count[2];
+        Counter             m_cycle_count[2];
+        
 };
 
 #endif

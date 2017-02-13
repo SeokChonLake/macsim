@@ -535,7 +535,10 @@ int dcu_c::access(uop_c* uop)
   }
   else {
     int appl_id = m_simBase->m_core_pointers[uop->m_core_id]->get_appl_id(uop->m_thread_id);
-    line = (dcache_data_s*)m_cache->access_cache(vaddr, &line_addr, true, appl_id);
+    if (m_level == MEM_L3 && *KNOB(KNOB_ENABLE_L3_CORE_SAMPL))
+        line = (dcache_data_s*)m_cache->access_cache(vaddr, &line_addr, true, uop->m_core_id);
+    else
+        line = (dcache_data_s*)m_cache->access_cache(vaddr, &line_addr, true, appl_id);
     cache_hit = (line) ? true : false;
 
     if (m_level != MEM_L3) {
@@ -827,9 +830,13 @@ void dcu_c::process_in_queue()
     }
     else if (!m_disable) {
       // for wb request, do not update lru state in case of the hit
-      line = (dcache_data_s*)m_cache->access_cache(req->m_addr, &line_addr, 
-          req->m_type == MRT_WB ? false : true, req->m_appl_id);
-      cache_hit = (line) ? true : false;
+        if (m_level == MEM_L3 && *KNOB(KNOB_ENABLE_L3_CORE_SAMPL))
+            line = (dcache_data_s*)m_cache->access_cache(req->m_addr, &line_addr, 
+                    req->m_type == MRT_WB ? false : true, req->m_core_id);
+        else
+            line = (dcache_data_s*)m_cache->access_cache(req->m_addr, &line_addr, 
+                    req->m_type == MRT_WB ? false : true, req->m_appl_id);
+        cache_hit = (line) ? true : false;
 
       if (m_level != MEM_L3) {
         POWER_CORE_EVENT(req->m_core_id, POWER_DCACHE_R_TAG + (m_level -1));

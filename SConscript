@@ -245,7 +245,8 @@ macsim_src = [
   'src/cs_disas.cc',
   'src/resource.cc',
   'src/ucp.cc',
-  'src/rrip.cc'
+  'src/rrip.cc',
+  'src/tap_ucp.cc'
 ]
 
 
