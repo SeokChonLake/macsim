@@ -42,6 +42,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "assert_macros.h"
 #include "cache.h"
 #include "ucp.h"
+#include "rrip.h"
 #include "core.h"
 #include "debug_macros.h"
 #include "dram.h"
@@ -230,9 +231,9 @@ cache_c *default_llc(macsim_c* m_simBase)
 #endif
 // Quick hack for regression test 
 // TODO: construct the llc as the knob option
-  cache_c* llc = new ucp_cache_c("llc_default", *KNOB(KNOB_L3_NUM_SET), *KNOB(KNOB_L3_ASSOC),
+  cache_c* llc = new rrip_cache_c("llc_default", *KNOB(KNOB_L3_NUM_SET), *KNOB(KNOB_L3_ASSOC),
       *KNOB(KNOB_L3_LINE_SIZE), sizeof(dcache_data_s), *KNOB(KNOB_L3_NUM_BANK),
-      false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase, UMON_GLOBAL);
+      false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase, SDM_DSS);
 
 
   return llc;
@@ -761,22 +762,23 @@ bool dcu_c::insert(mem_req_s* req)
 // =======================================
 void dcu_c::run_a_cycle(bool pll_lock)
 {
-  if (pll_lock) {
-    ++m_cycle;
-    return ;
-  }
+	if (pll_lock) {
+		++m_cycle;
+		return ;
+	}
 
-  process_wb_queue();
-  process_fill_queue();
-  process_out_queue();
-  process_in_queue();
+	process_wb_queue();
+	process_fill_queue();
+	process_out_queue();
+	process_in_queue();
 
-  if (*KNOB(KNOB_ENABLE_IRIS) || *KNOB(KNOB_ENABLE_NEW_NOC))
-    receive_packet();
+	if (*KNOB(KNOB_ENABLE_IRIS) || *KNOB(KNOB_ENABLE_NEW_NOC))
+		receive_packet();
+	
+	++m_cycle;
 
-  ++m_cycle;
-
-  update_cache_policy(m_cycle);
+	if (m_level == MEM_L3)
+		update_cache_policy(m_cycle);
 }
 
 

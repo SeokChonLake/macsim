@@ -203,6 +203,8 @@ void* cache_c::access_cache(Addr addr, Addr *line_addr, bool update_repl, int ap
   Addr tag;
   int set;
 
+  //YW
+  //cout << __FUNCTION__ << endl;
   // Get Tag and set to check if the addr exists in cache
   find_tag_and_set(addr, &tag, &set);
   *line_addr = base_cache_line (addr);
