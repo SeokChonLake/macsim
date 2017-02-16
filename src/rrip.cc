@@ -167,14 +167,18 @@ cache_entry_c* rrip_cache_c::find_replacement_line(int set, int appl_id)
 	}
 }
 
+void rrip_cache_c::update_line_on_hit(cache_entry_c* line, int set, int appl_id)
+{
+	line->m_last_access_time = 0;
+}
+
 void rrip_cache_c::update_cache_policy(Counter m_cycle)
 {
 	static uns32 check = 1; 
-	uns32 check_point = m_cycle / 5000000;
+	uns32 check_point = m_cycle / 500000;
 
 	if (check_point > check)
 	{
-		cout << "here reset" << endl;
 		m_psel[BRRIP] = 0;
 		m_psel[SRRIP] = 0;
 

@@ -39,6 +39,7 @@ class rrip_cache_c: public cache_c
 		virtual ~rrip_cache_c();
 
 		void update_cache_on_miss(Addr addr, int set,  int appl_id);
+		void update_line_on_hit(cache_entry_c* line, int set, int appl_id);
 		//		void update_cache_on_access(Addr tag, int set, int appl_id);
 		cache_entry_c* find_replacement_line(int set, int appl_id);
 		void update_cache_policy(Counter m_cycle);
