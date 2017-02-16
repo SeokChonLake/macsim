@@ -224,16 +224,23 @@ cache_c *default_llc(macsim_c* m_simBase)
       interleaving = *m_simBase->m_knobs->KNOB_DRAM_ROWBUFFER_SIZE;
     }
   }
-#if 0
-  cache_c* llc = new cache_c("llc_default", *KNOB(KNOB_L3_NUM_SET), *KNOB(KNOB_L3_ASSOC),
-      *KNOB(KNOB_L3_LINE_SIZE), sizeof(dcache_data_s), *KNOB(KNOB_L3_NUM_BANK),
-      false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase);
-#endif
-// Quick hack for regression test 
-// TODO: construct the llc as the knob option
-  cache_c* llc = new rrip_cache_c("llc_default", *KNOB(KNOB_L3_NUM_SET), *KNOB(KNOB_L3_ASSOC),
-      *KNOB(KNOB_L3_LINE_SIZE), sizeof(dcache_data_s), *KNOB(KNOB_L3_NUM_BANK),
-      false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase, SDM_DSS);
+
+  cache_c *llc;
+  string pol_name = *KNOB(KNOB_L3_REPL);
+  if (!pol_name.compare("LRU"))
+  {
+	  cout << "l3_policy: " << pol_name << "," << "LRU" << endl;
+	  llc = new cache_c("llc_default", *KNOB(KNOB_L3_NUM_SET), *KNOB(KNOB_L3_ASSOC),
+			  *KNOB(KNOB_L3_LINE_SIZE), sizeof(dcache_data_s), *KNOB(KNOB_L3_NUM_BANK),
+			  false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase);
+  }
+  else if (!pol_name.compare("RRIP"))
+  {
+	  cout << "l3_policy: " << pol_name << "," << "RRIP" << endl;
+	  llc = new rrip_cache_c("llc_default", *KNOB(KNOB_L3_NUM_SET), *KNOB(KNOB_L3_ASSOC),
+			  *KNOB(KNOB_L3_LINE_SIZE), sizeof(dcache_data_s), *KNOB(KNOB_L3_NUM_BANK),
+			  false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase, SDM_DSS);
+  }
 
 
   return llc;
