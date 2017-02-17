@@ -242,6 +242,13 @@ cache_c *default_llc(macsim_c* m_simBase)
 			  *KNOB(KNOB_L3_LINE_SIZE), sizeof(dcache_data_s), *KNOB(KNOB_L3_NUM_BANK),
 			  false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase, SDM_DSS);
   }
+  else if (!pol_name.compare("UCP"))
+  {
+	  cout << "l3_policy: " << pol_name << "," << "UCP" << endl;
+	  llc = new ucp_cache_c("llc_default", *KNOB(KNOB_L3_NUM_SET), *KNOB(KNOB_L3_ASSOC),
+			  *KNOB(KNOB_L3_LINE_SIZE), sizeof(dcache_data_s), *KNOB(KNOB_L3_NUM_BANK),
+			  false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase, UMON_DSS);
+  }
   else
   {
 	  cout << "?KKYU?" << endl;

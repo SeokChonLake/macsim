@@ -1,11 +1,11 @@
 #Simulation Configuration
-num_sim_cores 2
+num_sim_cores 4
 num_sim_small_cores 0
 num_sim_medium_cores 0
-num_sim_large_cores 2
+num_sim_large_cores 4
 core_type ptx
 large_core_type x86
-sim_cycle_count 1000000000 
+sim_cycle_count 10000000
 max_insts 500000000
 heartbeat_interval 1000000
 forward_progress_limit 50000
