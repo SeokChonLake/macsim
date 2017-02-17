@@ -1,8 +1,8 @@
 #Simulation Configuration
-num_sim_cores 5
+num_sim_cores 2
 num_sim_small_cores 0
 num_sim_medium_cores 0
-num_sim_large_cores 5
+num_sim_large_cores 2
 core_type ptx
 large_core_type x86
 sim_cycle_count 1000000000 
@@ -95,7 +95,7 @@ infinite_port 0
 num_l3 1
 l3_num_set 1024
 l3_line_size 64
-l3_assoc 32
+l3_assoc 16
 l3_num_bank 8
 l3_latency 30 
 pref_framework_on 1

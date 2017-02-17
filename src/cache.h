@@ -44,6 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "macsim.h"
 #include "global_types.h" 
 #include "global_defs.h"
+#include "memreq_info.h"
 
 typedef enum Cache_Type_enum 
 {

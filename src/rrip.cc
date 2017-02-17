@@ -126,12 +126,14 @@ LABEL_BRRIP:
 				ins_line->m_last_access_time = DISTANT_RRPV;
 			break;
 	}
+
 }
 
 // Extract victim cache line from Long RRPV position
 cache_entry_c* rrip_cache_c::find_replacement_line(int set, int appl_id)
 {
 	int RRIP_tail_ind = 0;
+
 	// If free entry found, return it
 	for (int ii = 0; ii < m_assoc; ii++)
 	{
@@ -143,7 +145,7 @@ cache_entry_c* rrip_cache_c::find_replacement_line(int set, int appl_id)
 
 	while(1) {
 		RRIP_tail_ind = -1;
-		// if the long re-reference interval prediction value entry found, return it
+		// if the distant re-reference interval prediction value entry found, return it
 		for(int ii = 0; ii < m_assoc; ii++)
 		{
 			cache_entry_c* line = &(m_set[set]->m_entry[ii]);
@@ -155,7 +157,7 @@ cache_entry_c* rrip_cache_c::find_replacement_line(int set, int appl_id)
 				return &(m_set[set]->m_entry[ii]);
 			}
 		}
-		if (RRIP_tail_ind == -1) // Can't find long RRPV, do aging for all entry
+		if (RRIP_tail_ind == -1) // Can't find distant RRPV, do aging for all entry
 		{
 			for (int ii = 0; ii < m_assoc; ii++)
 			{

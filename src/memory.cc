@@ -227,6 +227,7 @@ cache_c *default_llc(macsim_c* m_simBase)
 
   cache_c *llc;
   string pol_name = *KNOB(KNOB_L3_REPL);
+  cout << pol_name << endl;
   if (!pol_name.compare("LRU"))
   {
 	  cout << "l3_policy: " << pol_name << "," << "LRU" << endl;
