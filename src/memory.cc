@@ -241,6 +241,11 @@ cache_c *default_llc(macsim_c* m_simBase)
 			  *KNOB(KNOB_L3_LINE_SIZE), sizeof(dcache_data_s), *KNOB(KNOB_L3_NUM_BANK),
 			  false, 0, CACHE_DL1, false, num_tiles, interleaving, m_simBase, SDM_DSS);
   }
+  else
+  {
+	  cout << "?KKYU?" << endl;
+	  ASSERT(0);
+  }
 
 
   return llc;
@@ -830,6 +835,11 @@ void dcu_c::process_in_queue()
     Addr line_addr;
     dcache_data_s* line;
     bool cache_hit = false;
+
+    if(m_level == MEM_L3) {
+	    STAT_CORE_EVENT(req->m_core_id, L3_TOT_ACCESS_CORE);
+    }
+    
     if (m_level == MEM_L3 && req->m_bypass == true) {
       line = NULL;
       cache_hit = false;
@@ -848,7 +858,6 @@ void dcu_c::process_in_queue()
       }
     }
 
-
     // -------------------------------------
     // Cache hit
     // -------------------------------------
@@ -858,6 +867,11 @@ void dcu_c::process_in_queue()
       }
       else {
         POWER_EVENT(POWER_L3CACHE_R );
+      }
+    
+      if(m_level == MEM_L3) {
+	    STAT_CORE_EVENT(req->m_core_id, L3_HIT_CORE);
+	    STAT_CORE_EVENT(req->m_core_id, L3_HIT_RATE_CORE);
       }
 
       // -------------------------------------
@@ -922,15 +936,20 @@ void dcu_c::process_in_queue()
     // Cache miss or Disabled cache
     // -------------------------------------
     else {
-      // hardware prefetcher training
-      if (!m_disable) {
-        m_simBase->m_core_pointers[req->m_core_id]->train_hw_pref(m_level, req->m_thread_id, \
-            req->m_addr, req->m_pc, req->m_uop ? req->m_uop : NULL, false);
-        //g_core_pointers[req->m_core_id]->m_hw_pref->train(m_level, req->m_thread_id, 
-        //    req->m_addr, req->m_pc, req->m_uop ? req->m_uop : NULL, false);
-      }
 
-      STAT_EVENT(L1_HIT_CPU + (m_level - 1)*4 + 2 + req->m_ptx);
+	    if(m_level == MEM_L3) {
+		    STAT_CORE_EVENT(req->m_core_id, L3_MISS_CORE);
+		    STAT_CORE_EVENT(req->m_core_id, L3_MISS_RATE_CORE);
+	    }
+	    // hardware prefetcher training
+	    if (!m_disable) {
+		    m_simBase->m_core_pointers[req->m_core_id]->train_hw_pref(m_level, req->m_thread_id, \
+				    req->m_addr, req->m_pc, req->m_uop ? req->m_uop : NULL, false);
+		    //g_core_pointers[req->m_core_id]->m_hw_pref->train(m_level, req->m_thread_id, 
+		    //    req->m_addr, req->m_pc, req->m_uop ? req->m_uop : NULL, false);
+	    }
+
+	    STAT_EVENT(L1_HIT_CPU + (m_level - 1)*4 + 2 + req->m_ptx);
 
 //      handle_coherence(m_level, false, );
 

@@ -108,7 +108,6 @@ void rrip_cache_c::initialize_cache_line(cache_entry_c *ins_line, Addr tag, Addr
 		++m_num_cpu_line;
 		++m_set[set_id]->m_num_cpu_line;
 	}
-
 	// Select insertion policy
 	switch(m_pstate[set_id])
 	{
@@ -137,8 +136,9 @@ cache_entry_c* rrip_cache_c::find_replacement_line(int set, int appl_id)
 	for (int ii = 0; ii < m_assoc; ii++)
 	{
 		cache_entry_c* line = &(m_set[set]->m_entry[ii]);
-		if (!line->m_valid) 
+		if (!line->m_valid) {
 			return line;
+		}
 	}
 
 	while(1) {
@@ -148,10 +148,11 @@ cache_entry_c* rrip_cache_c::find_replacement_line(int set, int appl_id)
 		{
 			cache_entry_c* line = &(m_set[set]->m_entry[ii]);
 			// use m_last_access_time as a rrpv
-			if(line->m_last_access_time == DISTANT_RRPV)
+			if(line->m_last_access_time >= DISTANT_RRPV)
 			{
 				// TODO: Need to break a tie 
 				RRIP_tail_ind = ii;
+				return &(m_set[set]->m_entry[ii]);
 			}
 		}
 		if (RRIP_tail_ind == -1) // Can't find long RRPV, do aging for all entry
@@ -162,8 +163,10 @@ cache_entry_c* rrip_cache_c::find_replacement_line(int set, int appl_id)
 				line->m_last_access_time++;
 			}
 		}
-		else    // long RRPV entry found, return it
+		else{
+		    	// long RRPV entry found, return it
 			return &(m_set[set]->m_entry[RRIP_tail_ind]);
+		}
 	}
 }
 
