@@ -1,0 +1,194 @@
+####################################################################################################
+Interval
+####################################################################################################
+Cumulative:         Cycles:                  20000     Instructions:                  1200
+DISPATCHED_INST                                         337816565                     337816565
+
+DISPATCH_WAIT                                         12152979459                       35.9751
+
+NUM_NO_FETCH_CYCLES                                             0                             0
+
+AVG_CORE_IDLE_CYCLE                                             0                             0
+
+REEXEC_NUM                                                      0                             0
+
+INV_MATCH_NUM                                                   0                             0
+
+EARLY_PERM_NUM                                                  0                             0
+
+PERM_MATCH_NUM                                                  0                             0
+
+RETIRE_SPECLD_NUM                                               0                             0
+
+RETIRE_SPECST_NUM                                               0                             0
+
+FENCE_HEAD_ROB_WAIT                                             0                             0
+
+NUM_SAMPLES_CORE_0                                      107374184                     107374184
+
+NUM_ACTIVE_BLOCKS_CORE_0                                        0                             0
+
+NUM_ACTIVE_THREADS_CORE_0                               107374184                             1
+
+NUM_SCHED_IDLE_CYCLE_CORE_0                               7964831                       7964831
+
+NUM_NO_SCHED_CYCLE_CORE_0                                65769658                      65769658
+
+CORE_DISPATCHED_INST_CORE_0                             103390167                     103390167
+
+CORE_DISPATCH_WAIT_CORE_0                              4330493274                        41.885
+
+CORE_CYCLES_CORE_0                                              0                             0
+
+CORE_SCHED_THREADS_CORE_0                                       0                           NaN
+
+CORE_NUM_NO_FETCH_CYCLES_CORE_0                                 0                             0
+
+CORE_NUM_NO_FETCH_CYCLES_WITH_READY_THREADS_CORE_0                   0                             0
+
+CORE_NUM_FETCH_CYCLES_CORE_0                                    0                             0
+
+CORE_FETCH_DELTA_CORE_0                                         0                           NaN
+
+CORE_NUM_RETIRE_CYCLES_CORE_0                                   0                             0
+
+CORE_RETIRE_DELTA_CORE_0                                        0                           NaN
+
+FENCE_PREF_REQ_CORE_0                                           0                             0
+
+FENCE_WAITING_CORE_0                                            0                             0
+
+DYN_FENCE_NUM_CORE_0                                            0                             0
+
+WB_ORDERING_STALL_CORE_0                                        0                             0
+
+WB_FULL_CORE_0                                                  0                             0
+
+FENCE_TOT_CYCLES_CORE_0                                         0                             0
+
+FENCE_EXEC_CYCLES_CORE_0                                        0                             0
+
+STORE_RES_CORE_0                                        789786170                     789786170
+
+STORE_NUM_CORE_0                                          7091794                       7091794
+
+STORE_WB_FREE_CORE_0                                            0                             0
+
+SCHED_FAILED_REASON_SUCCESS_CORE_0                      103390636                       5.86898%
+SCHED_FAILED_OPERANDS_NOT_READY_CORE_0                 1649379029                       93.6271%
+SCHED_FAILED_NO_PORTS_CORE_0                              8877196                      0.503915%
+SCHED_FAILED_FENCE_ACTIVE_CORE_0                                0                             0%
+                                                       1761646861                           100%
+
+NUM_SAMPLES_CORE_1                                      107374184                     107374184
+
+NUM_ACTIVE_BLOCKS_CORE_1                                        0                             0
+
+NUM_ACTIVE_THREADS_CORE_1                               107374184                             1
+
+NUM_SCHED_IDLE_CYCLE_CORE_1                               8025033                       8025033
+
+NUM_NO_SCHED_CYCLE_CORE_1                                25251061                      25251061
+
+CORE_DISPATCHED_INST_CORE_1                             138527442                     138527442
+
+CORE_DISPATCH_WAIT_CORE_1                              4386387498                       31.6644
+
+CORE_CYCLES_CORE_1                                              0                             0
+
+CORE_SCHED_THREADS_CORE_1                                       0                           NaN
+
+CORE_NUM_NO_FETCH_CYCLES_CORE_1                                 0                             0
+
+CORE_NUM_NO_FETCH_CYCLES_WITH_READY_THREADS_CORE_1                   0                             0
+
+CORE_NUM_FETCH_CYCLES_CORE_1                                    0                             0
+
+CORE_FETCH_DELTA_CORE_1                                         0                           NaN
+
+CORE_NUM_RETIRE_CYCLES_CORE_1                                   0                             0
+
+CORE_RETIRE_DELTA_CORE_1                                        0                           NaN
+
+FENCE_PREF_REQ_CORE_1                                           0                             0
+
+FENCE_WAITING_CORE_1                                            0                             0
+
+DYN_FENCE_NUM_CORE_1                                            0                             0
+
+WB_ORDERING_STALL_CORE_1                                        0                             0
+
+WB_FULL_CORE_1                                                  0                             0
+
+FENCE_TOT_CYCLES_CORE_1                                         0                             0
+
+FENCE_EXEC_CYCLES_CORE_1                                        0                             0
+
+STORE_RES_CORE_1                                       2184008567                    2184008567
+
+STORE_NUM_CORE_1                                         15815800                      15815800
+
+STORE_WB_FREE_CORE_1                                            0                             0
+
+SCHED_FAILED_REASON_SUCCESS_CORE_1                      138583914                        6.6499%
+SCHED_FAILED_OPERANDS_NOT_READY_CORE_1                 1935487282                       92.8737%
+SCHED_FAILED_NO_PORTS_CORE_1                              9928259                      0.476404%
+SCHED_FAILED_FENCE_ACTIVE_CORE_1                                0                             0%
+                                                       2083999455                           100%
+
+NUM_SAMPLES_CORE_2                                      107374184                     107374184
+
+NUM_ACTIVE_BLOCKS_CORE_2                                        0                             0
+
+NUM_ACTIVE_THREADS_CORE_2                               107374184                             1
+
+NUM_SCHED_IDLE_CYCLE_CORE_2                              15286239                      15286239
+
+NUM_NO_SCHED_CYCLE_CORE_2                                40659539                      40659539
+
+CORE_DISPATCHED_INST_CORE_2                              95898956                      95898956
+
+CORE_DISPATCH_WAIT_CORE_2                              3436098687                       35.8304
+
+CORE_CYCLES_CORE_2                                              0                             0
+
+CORE_SCHED_THREADS_CORE_2                                       0                           NaN
+
+CORE_NUM_NO_FETCH_CYCLES_CORE_2                                 0                             0
+
+CORE_NUM_NO_FETCH_CYCLES_WITH_READY_THREADS_CORE_2                   0                             0
+
+CORE_NUM_FETCH_CYCLES_CORE_2                                    0                             0
+
+CORE_FETCH_DELTA_CORE_2                                         0                           NaN
+
+CORE_NUM_RETIRE_CYCLES_CORE_2                                   0                             0
+
+CORE_RETIRE_DELTA_CORE_2                                        0                           NaN
+
+FENCE_PREF_REQ_CORE_2                                           0                             0
+
+FENCE_WAITING_CORE_2                                            0                             0
+
+DYN_FENCE_NUM_CORE_2                                            0                             0
+
+WB_ORDERING_STALL_CORE_2                                        0                             0
+
+WB_FULL_CORE_2                                                  0                             0
+
+FENCE_TOT_CYCLES_CORE_2                                         0                             0
+
+FENCE_EXEC_CYCLES_CORE_2                                        0                             0
+
+STORE_RES_CORE_2                                       2089192386                    2089192386
+
+STORE_NUM_CORE_2                                         10796037                      10796037
+
+STORE_WB_FREE_CORE_2                                            0                             0
+
+SCHED_FAILED_REASON_SUCCESS_CORE_2                       95927310                       5.43583%
+SCHED_FAILED_OPERANDS_NOT_READY_CORE_2                 1662073466                       94.1832%
+SCHED_FAILED_NO_PORTS_CORE_2                              6722531                       0.38094%
+SCHED_FAILED_FENCE_ACTIVE_CORE_2                                0                             0%
+                                                       1764723307                           100%
+

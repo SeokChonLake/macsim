@@ -1,0 +1,27 @@
+Arguments: ./macsim 
+src/macsim.cc:133: (I=0  C=0):  initialize knobs
+number of cores : 2
+src/macsim.cc:531: (I=0  C=0):  initialize simulation
+src/macsim.cc:327: (I=0  C=0):  initialize cores (2/0/0)
+src/memory.cc:1695: (I=0  C=0):  Memory system(l2_decoupled_network) has been initialized.
+l3_policy: LRU,LRU
+src/network_ring.cc:107: (I=0  C=0):  TOTAL_ROUTER:4 CPU:2 GPU:0 L3:1 MC:1
+src/network_ring.cc:312: (I=0  C=0):  RING topology
+0 <-> 1 <-> 2 <-> 3 <-> 
+enabling bug detector
+src/macsim.cc:748: (I=0  C=0):  Initializing new noc
+
+src/macsim.cc:839: (I=0  C=0):  Clock LCM           : 920
+src/macsim.cc:840: (I=0  C=0):  CPU clock frequency : 2.3 GHz
+src/macsim.cc:841: (I=0  C=0):  GPU clock frequency : 2.3 GHz
+src/macsim.cc:842: (I=0  C=0):  L3  clock frequency : 1 GHz
+src/macsim.cc:843: (I=0  C=0):  NOC clock frequency : 1 GHz
+src/macsim.cc:844: (I=0  C=0):  MC  clock frequency : 0.8 GHz
+src/process_manager.cc:455: (I=0  C=0):  setup_process:0 ../../../../jinku/macsim_traces/astar/trace.txt current_index:0 (1)
+src/process_manager.cc:548: (I=0  C=0):  thread_count:1
+src/process_manager.cc:455: (I=0  C=0):  setup_process:1 ../../BWC7_14MB/trace.txt current_index:0 (1)
+src/process_manager.cc:548: (I=0  C=0):  thread_count:1
+** Heartbeat for core[00]:        insts:10000000    cycles:9672954    (386918120) seconds:79    -- 1.03 IPC (1.03 IPC) -- 0.00 KIPS (126.58 KIPS)
+** Heartbeat for core[00]:  Thread:0      insts:10000000    cycles:9672954    (386918120) seconds:79    -- 1.03 IPC (1.03 IPC) -- 0.00 KIPS (126.58 KIPS)
+** Heartbeat for core[00]:        insts:20000000    cycles:19214486   (768579400) seconds:167   -- 1.05 IPC (1.04 IPC) -- 113.64 KIPS (119.76 KIPS)
+** Heartbeat for core[00]:  Thread:0      insts:20000000    cycles:19214486   (768579400) seconds:167   -- 1.05 IPC (1.04 IPC) -- 113.64 KIPS (119.76 KIPS)

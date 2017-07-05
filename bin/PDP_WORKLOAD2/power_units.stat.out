@@ -1,0 +1,486 @@
+####################################################################################################
+Interval
+####################################################################################################
+Cumulative:         Cycles:                  20000     Instructions:                  1200
+POWER_L3CACHE_LINEFILL_BUF_R                               452092                        452092
+
+POWER_L3CACHE_LINEFILL_BUF_W                               452092                        452092
+
+POWER_L3CACHE_LINEFILL_BUF_R_TAG                           452092                        452092
+
+POWER_L3CACHE_WB_BUF_R                                       1003                          1003
+
+POWER_L3CACHE_WB_BUF_W                                       1003                          1003
+
+POWER_L3CACHE_WB_BUF_R_TAG                                   1003                          1003
+
+POWER_L3CACHE_R                                            768227                        768227
+
+POWER_L3CACHE_W                                            101598                        101598
+
+POWER_L3CACHE_R_TAG                                       1220320                       1220320
+
+POWER_MC_R                                                9218922                       9218922
+
+POWER_MC_W                                                 453096                        453096
+
+POWER_BLOCK_STATES_R_CORE_0                             107374184                     107374184
+
+POWER_BLOCK_STATES_W_CORE_0                             107374184                     107374184
+
+POWER_FETCH_QUEUE_R_CORE_0                              103909244                     103909244
+
+POWER_FETCH_QUEUE_W_CORE_0                              103909244                     103909244
+
+POWER_INST_QUEUE_R_CORE_0                               224114897                     224114897
+
+POWER_INST_QUEUE_W_CORE_0                               103908990                     103908990
+
+POWER_BR_PRED_R_CORE_0                                   11427940                      11427940
+
+POWER_BR_PRED_W_CORE_0                                   11299393                      11299393
+
+POWER_RAS_R_CORE_0                                         558179                        558179
+
+POWER_RAS_W_CORE_0                                         532730                        532730
+
+POWER_ICACHE_R_CORE_0                                    25977311                      25977311
+
+POWER_ICACHE_W_CORE_0                                         100                           100
+
+POWER_ICACHE_R_TAG_CORE_0                                25977411                      25977411
+
+POWER_ICACHE_MISS_BUF_R_CORE_0                                200                           200
+
+POWER_ICACHE_MISS_BUF_W_CORE_0                                200                           200
+
+POWER_ICACHE_MISS_BUF_R_TAG_CORE_0                            100                           100
+
+POWER_ICACHE_MISS_BUF_W_TAG_CORE_0                              0                             0
+
+POWER_ICACHE_TOT_ACC_CORE_0                                     0                             0
+
+POWER_ICACHE_CONF_CORE_0                                        0                             0
+
+POWER_INST_DECODER_R_CORE_0                              80790367                      80790367
+
+POWER_INST_DECODER_W_CORE_0                                     0                             0
+
+POWER_MICRO_OP_SEQ_R_CORE_0                                     0                             0
+
+POWER_MICRO_OP_SEQ_W_CORE_0                                     0                             0
+
+POWER_OPERAND_DECODER_R_CORE_0                           80790367                      80790367
+
+POWER_OPERAND_DECODER_W_CORE_0                                  0                             0
+
+POWER_UOP_QUEUE_R_CORE_0                                224114897                     224114897
+
+POWER_UOP_QUEUE_W_CORE_0                                103908990                     103908990
+
+POWER_REG_RENAMING_TABLE_R_CORE_0                       224114897                     224114897
+
+POWER_REG_RENAMING_TABLE_W_CORE_0                       103908990                     103908990
+
+POWER_DEP_CHECK_LOGIC_R_CORE_0                          103909244                     103909244
+
+POWER_FREELIST_R_CORE_0                                 224114897                     224114897
+
+POWER_FREELIST_W_CORE_0                                 103908990                     103908990
+
+POWER_RESERVATION_STATION_R_CORE_0                      103909350                     103909350
+
+POWER_RESERVATION_STATION_W_CORE_0                      103908946                     103908946
+
+POWER_RESERVATION_STATION_R_TAG_CORE_0                  103909350                     103909350
+
+POWER_RESERVATION_STATION_W_TAG_CORE_0                          0                             0
+
+POWER_INST_ISSUE_SEL_LOGIC_R_CORE_0                     103909350                     103909350
+
+POWER_INST_ISSUE_SEL_LOGIC_W_CORE_0                     103908922                     103908922
+
+POWER_PAYLOAD_RAM_R_CORE_0                              103909350                     103909350
+
+POWER_PAYLOAD_RAM_W_CORE_0                              103908922                     103908922
+
+POWER_EX_ALU_R_CORE_0                                    63976667                      63976667
+
+POWER_EX_FPU_R_CORE_0                                       61392                         61392
+
+POWER_EX_MUL_R_CORE_0                                     4308048                       4308048
+
+POWER_EX_SFU_R_CORE_0                                           0                             0
+
+POWER_REORDER_BUF_R_CORE_0                              103908746                     103908746
+
+POWER_REORDER_BUF_W_CORE_0                              207817980                     207817980
+
+POWER_INST_COMMIT_SEL_LOGIC_R_CORE_0                    103908746                     103908746
+
+POWER_INST_COMMIT_SEL_LOGIC_W_CORE_0                    103908990                     103908990
+
+POWER_FP_RENAME_R_CORE_0                                   150137                        150137
+
+POWER_FP_RENAME_W_CORE_0                                        0                             0
+
+POWER_LOAD_QUEUE_R_CORE_0                                28428751                      28428751
+
+POWER_LOAD_QUEUE_W_CORE_0                                28428751                      28428751
+
+POWER_LOAD_QUEUE_R_TAG_CORE_0                            28428751                      28428751
+
+POWER_LOAD_QUEUE_W_TAG_CORE_0                                   0                             0
+
+POWER_STORE_QUEUE_R_CORE_0                                7134492                       7134492
+
+POWER_STORE_QUEUE_W_CORE_0                                7134492                       7134492
+
+POWER_STORE_QUEUE_R_TAG_CORE_0                            7134492                       7134492
+
+POWER_STORE_QUEUE_W_TAG_CORE_0                                  0                             0
+
+POWER_DATA_TLB_R_CORE_0                                  28428751                      28428751
+
+POWER_DATA_TLB_W_CORE_0                                         0                             0
+
+POWER_DATA_TLB_R_TAG_CORE_0                                     0                             0
+
+POWER_DATA_TLB_W_TAG_CORE_0                                     0                             0
+
+POWER_INT_REGFILE_R_CORE_0                              172132245                     172132245
+
+POWER_INT_REGFILE_W_CORE_0                              103847530                     103847530
+
+POWER_FP_REGFILE_R_CORE_0                                  119703                        119703
+
+POWER_FP_REGFILE_W_CORE_0                                   61392                         61392
+
+POWER_GP_REGISTER_R_CORE_0                              172132245                     172132245
+
+POWER_GP_REGISTER_W_CORE_0                              103847530                     103847530
+
+POWER_FP_REGISTER_R_CORE_0                                 122784                        122784
+
+POWER_FP_REGISTER_W_CORE_0                                  61392                         61392
+
+POWER_SEGMENT_REGISTER_R_CORE_0                          35562815                      35562815
+
+POWER_SEGMENT_REGISTER_W_CORE_0                          69879495                      69879495
+
+POWER_CONTROL_REGISTER_R_CORE_0                                 0                             0
+
+POWER_CONTROL_REGISTER_W_CORE_0                           2018427                       2018427
+
+POWER_FLAG_REGISTER_R_CORE_0                                    0                             0
+
+POWER_FLAG_REGISTER_W_CORE_0                                    0                             0
+
+POWER_EXEC_BYPASS_CORE_0                                103908922                     103908922
+
+POWER_LOAD_BYPASS_CORE_0                                  1422193                       1422193
+
+POWER_PIPELINE_CORE_0                                    80789974                      80789974
+
+POWER_DCACHE_MISS_BUF_R_CORE_0                            1421993                       1421993
+
+POWER_DCACHE_MISS_BUF_R_TAG_CORE_0                        1649709                       1649709
+
+POWER_DCACHE_MISS_BUF_W_CORE_0                            1649709                       1649709
+
+POWER_DCACHE_MISS_BUF_W_TAG_CORE_0                              0                             0
+
+POWER_DCACHE_LINEFILL_BUF_R_CORE_0                              0                             0
+
+POWER_L2CACHE_LINEFILL_BUF_R_CORE_0                        944631                        944631
+
+POWER_DCACHE_LINEFILL_BUF_W_CORE_0                              0                             0
+
+POWER_L2CACHE_LINEFILL_BUF_W_CORE_0                        928300                        928300
+
+POWER_DCACHE_LINEFILL_BUF_R_TAG_CORE_0                          0                             0
+
+POWER_L2CACHE_LINEFILL_BUF_R_TAG_CORE_0                   1161836                       1161836
+
+POWER_DCACHE_LINEFILL_BUF_W_TAG_CORE_0                          0                             0
+
+POWER_DCACHE_WB_BUF_R_CORE_0                               217205                        217205
+
+POWER_L2CACHE_WB_BUF_R_CORE_0                                   0                             0
+
+POWER_DCACHE_WB_BUF_W_CORE_0                               217205                        217205
+
+POWER_L2CACHE_WB_BUF_W_CORE_0                                   0                             0
+
+POWER_DCACHE_WB_BUF_R_TAG_CORE_0                           434410                        434410
+
+POWER_L2CACHE_WB_BUF_R_TAG_CORE_0                               0                             0
+
+POWER_DCACHE_WB_BUF_W_TAG_CORE_0                                0                             0
+
+POWER_DCACHE_R_CORE_0                                    33913106                      33913106
+
+POWER_L2CACHE_R_CORE_0                                          0                             0
+
+POWER_DCACHE_W_CORE_0                                      710995                        710995
+
+POWER_L2CACHE_W_CORE_0                                          0                             0
+
+POWER_DCACHE_R_TAG_CORE_0                                35562815                      35562815
+
+POWER_L2CACHE_R_TAG_CORE_0                                      0                             0
+
+POWER_CONST_CACHE_R_CORE_0                                      0                             0
+
+POWER_CONST_CACHE_W_CORE_0                                      0                             0
+
+POWER_CONST_CACHE_R_TAG_CORE_0                                  0                             0
+
+POWER_CONST_CACHE_W_TAG_CORE_0                                  0                             0
+
+POWER_TEXTURE_CACHE_R_CORE_0                                    0                             0
+
+POWER_TEXTURE_CACHE_W_CORE_0                                    0                             0
+
+POWER_TEXTURE_CACHE_R_TAG_CORE_0                                0                             0
+
+POWER_TEXTURE_CACHE_W_TAG_CORE_0                                0                             0
+
+POWER_SHARED_MEM_R_CORE_0                                       0                             0
+
+POWER_SHARED_MEM_W_CORE_0                                       0                             0
+
+POWER_SHARED_MEM_R_TAG_CORE_0                                   0                             0
+
+POWER_SHARED_MEM_W_TAG_CORE_0                                   0                             0
+
+POWER_BLOCK_STATES_R_CORE_1                             107374184                     107374184
+
+POWER_BLOCK_STATES_W_CORE_1                             107374184                     107374184
+
+POWER_FETCH_QUEUE_R_CORE_1                              107273640                     107273640
+
+POWER_FETCH_QUEUE_W_CORE_1                              107273640                     107273640
+
+POWER_INST_QUEUE_R_CORE_1                               223446489                     223446489
+
+POWER_INST_QUEUE_W_CORE_1                               107273388                     107273388
+
+POWER_BR_PRED_R_CORE_1                                    7982647                       7982647
+
+POWER_BR_PRED_W_CORE_1                                    7981134                       7981134
+
+POWER_RAS_R_CORE_1                                           1009                          1009
+
+POWER_RAS_W_CORE_1                                            781                           781
+
+POWER_ICACHE_R_CORE_1                                    26818410                      26818410
+
+POWER_ICACHE_W_CORE_1                                         564                           564
+
+POWER_ICACHE_R_TAG_CORE_1                                26818974                      26818974
+
+POWER_ICACHE_MISS_BUF_R_CORE_1                               1128                          1128
+
+POWER_ICACHE_MISS_BUF_W_CORE_1                               1128                          1128
+
+POWER_ICACHE_MISS_BUF_R_TAG_CORE_1                            564                           564
+
+POWER_ICACHE_MISS_BUF_W_TAG_CORE_1                              0                             0
+
+POWER_ICACHE_TOT_ACC_CORE_1                                     0                             0
+
+POWER_ICACHE_CONF_CORE_1                                        0                             0
+
+POWER_INST_DECODER_R_CORE_1                              75414463                      75414463
+
+POWER_INST_DECODER_W_CORE_1                                     0                             0
+
+POWER_MICRO_OP_SEQ_R_CORE_1                                     0                             0
+
+POWER_MICRO_OP_SEQ_W_CORE_1                                     0                             0
+
+POWER_OPERAND_DECODER_R_CORE_1                           75414463                      75414463
+
+POWER_OPERAND_DECODER_W_CORE_1                                  0                             0
+
+POWER_UOP_QUEUE_R_CORE_1                                223446489                     223446489
+
+POWER_UOP_QUEUE_W_CORE_1                                107273388                     107273388
+
+POWER_REG_RENAMING_TABLE_R_CORE_1                       223446489                     223446489
+
+POWER_REG_RENAMING_TABLE_W_CORE_1                       107273388                     107273388
+
+POWER_DEP_CHECK_LOGIC_R_CORE_1                          107273640                     107273640
+
+POWER_FREELIST_R_CORE_1                                 223446489                     223446489
+
+POWER_FREELIST_W_CORE_1                                 107273388                     107273388
+
+POWER_RESERVATION_STATION_R_CORE_1                      107323475                     107323475
+
+POWER_RESERVATION_STATION_W_CORE_1                      107273385                     107273385
+
+POWER_RESERVATION_STATION_R_TAG_CORE_1                  107323475                     107323475
+
+POWER_RESERVATION_STATION_W_TAG_CORE_1                          0                             0
+
+POWER_INST_ISSUE_SEL_LOGIC_R_CORE_1                     107323475                     107323475
+
+POWER_INST_ISSUE_SEL_LOGIC_W_CORE_1                     107273362                     107273362
+
+POWER_PAYLOAD_RAM_R_CORE_1                              107323475                     107323475
+
+POWER_PAYLOAD_RAM_W_CORE_1                              107273362                     107273362
+
+POWER_EX_ALU_R_CORE_1                                    59505616                      59505616
+
+POWER_EX_FPU_R_CORE_1                                          56                            56
+
+POWER_EX_MUL_R_CORE_1                                         325                           325
+
+POWER_EX_SFU_R_CORE_1                                           0                             0
+
+POWER_REORDER_BUF_R_CORE_1                              107273179                     107273179
+
+POWER_REORDER_BUF_W_CORE_1                              214546776                     214546776
+
+POWER_INST_COMMIT_SEL_LOGIC_R_CORE_1                    107273179                     107273179
+
+POWER_INST_COMMIT_SEL_LOGIC_W_CORE_1                    107273388                     107273388
+
+POWER_FP_RENAME_R_CORE_1                                       74                            74
+
+POWER_FP_RENAME_W_CORE_1                                        0                             0
+
+POWER_LOAD_QUEUE_R_CORE_1                                35536790                      35536790
+
+POWER_LOAD_QUEUE_W_CORE_1                                35536790                      35536790
+
+POWER_LOAD_QUEUE_R_TAG_CORE_1                            35536790                      35536790
+
+POWER_LOAD_QUEUE_W_TAG_CORE_1                                   0                             0
+
+POWER_STORE_QUEUE_R_CORE_1                               12280688                      12280688
+
+POWER_STORE_QUEUE_W_CORE_1                               12280688                      12280688
+
+POWER_STORE_QUEUE_R_TAG_CORE_1                           12280688                      12280688
+
+POWER_STORE_QUEUE_W_TAG_CORE_1                                  0                             0
+
+POWER_DATA_TLB_R_CORE_1                                  35536790                      35536790
+
+POWER_DATA_TLB_W_CORE_1                                         0                             0
+
+POWER_DATA_TLB_R_TAG_CORE_1                                     0                             0
+
+POWER_DATA_TLB_W_TAG_CORE_1                                     0                             0
+
+POWER_INT_REGFILE_R_CORE_1                              166779247                     166779247
+
+POWER_INT_REGFILE_W_CORE_1                              107273306                     107273306
+
+POWER_FP_REGFILE_R_CORE_1                                     112                           112
+
+POWER_FP_REGFILE_W_CORE_1                                      56                            56
+
+POWER_GP_REGISTER_R_CORE_1                              166779247                     166779247
+
+POWER_GP_REGISTER_W_CORE_1                              107273306                     107273306
+
+POWER_FP_REGISTER_R_CORE_1                                    112                           112
+
+POWER_FP_REGISTER_W_CORE_1                                     56                            56
+
+POWER_SEGMENT_REGISTER_R_CORE_1                          47767365                      47767365
+
+POWER_SEGMENT_REGISTER_W_CORE_1                          87581435                      87581435
+
+POWER_CONTROL_REGISTER_R_CORE_1                                 0                             0
+
+POWER_CONTROL_REGISTER_W_CORE_1                           7961823                       7961823
+
+POWER_FLAG_REGISTER_R_CORE_1                                    0                             0
+
+POWER_FLAG_REGISTER_W_CORE_1                                    0                             0
+
+POWER_EXEC_BYPASS_CORE_1                                107273362                     107273362
+
+POWER_LOAD_BYPASS_CORE_1                                  1018448                       1018448
+
+POWER_PIPELINE_CORE_1                                    75414145                      75414145
+
+POWER_DCACHE_MISS_BUF_R_CORE_1                            1017320                       1017320
+
+POWER_DCACHE_MISS_BUF_R_TAG_CORE_1                        7115453                       7115453
+
+POWER_DCACHE_MISS_BUF_W_CORE_1                            7115453                       7115453
+
+POWER_DCACHE_MISS_BUF_W_TAG_CORE_1                              0                             0
+
+POWER_DCACHE_LINEFILL_BUF_R_CORE_1                              0                             0
+
+POWER_L2CACHE_LINEFILL_BUF_R_CORE_1                       2063843                       2063843
+
+POWER_DCACHE_LINEFILL_BUF_W_CORE_1                              0                             0
+
+POWER_L2CACHE_LINEFILL_BUF_W_CORE_1                        594757                        594757
+
+POWER_DCACHE_LINEFILL_BUF_R_TAG_CORE_1                          0                             0
+
+POWER_L2CACHE_LINEFILL_BUF_R_TAG_CORE_1                   2149376                       2149376
+
+POWER_DCACHE_LINEFILL_BUF_W_TAG_CORE_1                          0                             0
+
+POWER_DCACHE_WB_BUF_R_CORE_1                                85533                         85533
+
+POWER_L2CACHE_WB_BUF_R_CORE_1                                   0                             0
+
+POWER_DCACHE_WB_BUF_W_CORE_1                                85533                         85533
+
+POWER_L2CACHE_WB_BUF_W_CORE_1                                   0                             0
+
+POWER_DCACHE_WB_BUF_R_TAG_CORE_1                           171066                        171066
+
+POWER_L2CACHE_WB_BUF_R_TAG_CORE_1                               0                             0
+
+POWER_DCACHE_WB_BUF_W_TAG_CORE_1                                0                             0
+
+POWER_DCACHE_R_CORE_1                                    40651912                      40651912
+
+POWER_L2CACHE_R_CORE_1                                          0                             0
+
+POWER_DCACHE_W_CORE_1                                      508659                        508659
+
+POWER_L2CACHE_W_CORE_1                                          0                             0
+
+POWER_DCACHE_R_TAG_CORE_1                                47767365                      47767365
+
+POWER_L2CACHE_R_TAG_CORE_1                                      0                             0
+
+POWER_CONST_CACHE_R_CORE_1                                      0                             0
+
+POWER_CONST_CACHE_W_CORE_1                                      0                             0
+
+POWER_CONST_CACHE_R_TAG_CORE_1                                  0                             0
+
+POWER_CONST_CACHE_W_TAG_CORE_1                                  0                             0
+
+POWER_TEXTURE_CACHE_R_CORE_1                                    0                             0
+
+POWER_TEXTURE_CACHE_W_CORE_1                                    0                             0
+
+POWER_TEXTURE_CACHE_R_TAG_CORE_1                                0                             0
+
+POWER_TEXTURE_CACHE_W_TAG_CORE_1                                0                             0
+
+POWER_SHARED_MEM_R_CORE_1                                       0                             0
+
+POWER_SHARED_MEM_W_CORE_1                                       0                             0
+
+POWER_SHARED_MEM_R_TAG_CORE_1                                   0                             0
+
+POWER_SHARED_MEM_W_TAG_CORE_1                                   0                             0
+

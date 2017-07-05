@@ -1,0 +1,195 @@
+####################################################################################################
+Interval
+####################################################################################################
+Cumulative:         Cycles:                  20000     Instructions:                  1200
+AVG_MEMORY_LATENCY_BASE                                   8810703                       8810703
+
+AVG_MEMORY_LATENCY                                      536397848                       60.8803
+
+MSHR_FULL                                                       0                             0
+
+TOTAL_MEMORY                                              8525196                       8525196
+
+TOTAL_MEMORY_MERGE                                        7369738                      0.864466
+
+TOTAL_WB                                                   285512                     0.0334904
+
+L1_WB                                                      285096                      0.998543
+
+L2_WB                                                           0                             0
+
+L3_WB                                                         416                    0.00145703
+
+TOTAL_DRAM                                                 519021                        519021
+
+TOTAL_DRAM_MERGE                                                0                             0
+
+L1_HIT_CPU                                               71786921                      71786921
+
+L1_HIT_GPU                                                      0                             0
+
+L1_MISS_CPU                                               8524567                       8524567
+
+L1_MISS_GPU                                                     0                             0
+
+L2_HIT_CPU                                                      0                             0
+
+L2_HIT_GPU                                                      0                             0
+
+L2_MISS_CPU                                               1155458                       1155458
+
+L2_MISS_GPU                                                     0                             0
+
+L3_HIT_CPU                                                 636852                        636852
+
+L3_HIT_GPU                                                      0                             0
+
+L3_MISS_CPU                                                518605                        518605
+
+L3_MISS_GPU                                                     0                             0
+
+L3_HIT_PROMOTION_CPU                                            0                             0
+
+L3_HIT_PROMOTION_GPU                                            0                             0
+
+FETCH_THREAD_SKIP_LD_WAIT                                       0                             0
+
+FETCH_THREAD_SKIP_BR_WAIT                                       0                             0
+
+FETCH_THREAD_SKIP_SCHED_WAIT                                    0                             0
+
+NUM_MUL_TRANS_CM_TM_DM_INST                                     0                             0
+
+NUM_MUL_TRANS_CM_TM_DM                                          0                           NaN
+
+CONST_CACHE_HIT                                                 0                             0
+
+CONST_CACHE_MISS                                                0                             0
+
+CONST_CACHE_MISS_NO_EXECUTE                                     0                             0
+
+CONST_CACHE_ACCESS                                              0                             0
+
+TEXTURE_CACHE_HIT                                               0                             0
+
+TEXTURE_CACHE_MISS                                              0                             0
+
+TEXTURE_CACHE_NO_EXECUTE                                        0                             0
+
+TEXTURE_CACHE_ACCESS                                            0                             0
+
+SHARED_MEM_INST                                                 0                             0
+
+SHARED_MEM_ACCESS                                               0                             0
+
+CACHE_BANK_BUSY                                           8109713                       8109713
+
+ICACHE_MISS_TOTAL                                             629                           629
+
+TOTAL_CAGE_PERIOD                                               0                             0
+
+TOTAL_CAGE_APPL0                                                0                           NaN
+
+TOTAL_CAGE_APPL1                                                0                           NaN
+
+TOTAL_CAGE_APPL2                                                0                           NaN
+
+TOTAL_CAGE_APPL3                                                0                           NaN
+
+TOTAL_CAGE_APPL4                                                0                           NaN
+
+ABIP_AVG_RATIO_BASE                                             0                             0
+
+ABIP_AVG_RATIO                                                  0                           NaN
+
+TOTAL_WRITE_ACKS                                                0                             0
+
+TOTAL_WRITES                                                    0                             0
+
+NUM_PHYSICAL_PAGES                                              0                             0
+
+COAL_INST                                                       0                          NaN 
+UNCOAL_INST                                                     0                          NaN 
+                                                                0                           100%
+
+COAL_INST_SINGLE_TRANS                                          0                          NaN 
+COAL_INST_MUL_TRANS                                             0                          NaN 
+UNCOAL_INST_MUL_TRANS                                           0                          NaN 
+                                                                0                           100%
+
+SM_COAL_INST                                                    0                          NaN 
+CM_COAL_INST                                                    0                          NaN 
+TM_COAL_INST                                                    0                          NaN 
+DM_COAL_INST                                                    0                          NaN 
+                                                                0                           100%
+
+SM_UNCOAL_INST                                                  0                          NaN 
+CM_UNCOAL_INST                                                  0                          NaN 
+TM_UNCOAL_INST                                                  0                          NaN 
+DM_UNCOAL_INST                                                  0                          NaN 
+                                                                0                           100%
+
+SM_COAL_INST_SINGLE_TRANS                                       0                          NaN 
+CM_COAL_INST_SINGLE_TRANS                                       0                          NaN 
+TM_COAL_INST_SINGLE_TRANS                                       0                          NaN 
+DM_COAL_INST_SINGLE_TRANS                                       0                          NaN 
+                                                                0                           100%
+
+SM_COAL_INST_MUL_TRANS                                          0                          NaN 
+CM_COAL_INST_MUL_TRANS                                          0                          NaN 
+TM_COAL_INST_MUL_TRANS                                          0                          NaN 
+DM_COAL_INST_MUL_TRANS                                          0                          NaN 
+                                                                0                           100%
+
+LD_NO_FORWARD                                            32283021                       52.3941%
+FORWARDED_LD                                             29332784                       47.6059%
+                                                         61615805                           100%
+
+L3_TOT_ACCESS_CORE_CORE_0                                  650963                        650963
+
+L3_HIT_CORE_CORE_0                                         539192                        539192
+
+L3_MISS_CORE_CORE_0                                        111771                        111771
+
+L3_HIT_RATE_CORE_CORE_0                                    539192                      0.828299
+
+L3_MISS_RATE_CORE_CORE_0                                   111771                      0.171701
+
+L3_BYPASS_CORE_CORE_0                                       90923                         90923
+
+MEM_STALL_CYCLE_CORE_0                                          0                             0
+
+ICACHE_FILL_CORE_0                                            100                           100
+
+NUM_WRITE_ACKS_CORE_0                                           0                             0
+
+NUM_WRITES_CORE_0                                               0                             0
+
+ICACHE_HIT_CORE_0                                        24102881                       99.9996%
+ICACHE_MISS_CORE_0                                            100                   0.000414886%
+                                                         24102981                           100%
+
+L3_TOT_ACCESS_CORE_CORE_1                                  504494                        504494
+
+L3_HIT_CORE_CORE_1                                          97660                         97660
+
+L3_MISS_CORE_CORE_1                                        406834                        406834
+
+L3_HIT_RATE_CORE_CORE_1                                     97660                       0.19358
+
+L3_MISS_RATE_CORE_CORE_1                                   406834                       0.80642
+
+L3_BYPASS_CORE_CORE_1                                      339874                        339874
+
+MEM_STALL_CYCLE_CORE_1                                          0                             0
+
+ICACHE_FILL_CORE_1                                            529                           529
+
+NUM_WRITE_ACKS_CORE_1                                           0                             0
+
+NUM_WRITES_CORE_1                                               0                             0
+
+ICACHE_HIT_CORE_1                                        26573447                        99.998%
+ICACHE_MISS_CORE_1                                            529                    0.00199067%
+                                                         26573976                           100%
+

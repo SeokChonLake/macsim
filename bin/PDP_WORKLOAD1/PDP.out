@@ -1,0 +1,102 @@
+Arguments: ./macsim --l3_repl==PDP --num_sim_cores=1 --num_sim_large_cores=1 
+src/macsim.cc:133: (I=0  C=0):  initialize knobs
+number of cores : 1
+src/macsim.cc:531: (I=0  C=0):  initialize simulation
+src/macsim.cc:327: (I=0  C=0):  initialize cores (1/0/0)
+src/memory.cc:1695: (I=0  C=0):  Memory system(l2_decoupled_network) has been initialized.
+l3_policy: PDP,PDP
+1
+Way0:32
+ip_table done
+way0=32
+src/network_ring.cc:107: (I=0  C=0):  TOTAL_ROUTER:3 CPU:1 GPU:0 L3:1 MC:1
+src/network_ring.cc:312: (I=0  C=0):  RING topology
+0 <-> 1 <-> 2 <-> 
+enabling bug detector
+src/macsim.cc:748: (I=0  C=0):  Initializing new noc
+
+src/macsim.cc:839: (I=0  C=0):  Clock LCM           : 920
+src/macsim.cc:840: (I=0  C=0):  CPU clock frequency : 2.3 GHz
+src/macsim.cc:841: (I=0  C=0):  GPU clock frequency : 2.3 GHz
+src/macsim.cc:842: (I=0  C=0):  L3  clock frequency : 1 GHz
+src/macsim.cc:843: (I=0  C=0):  NOC clock frequency : 1 GHz
+src/macsim.cc:844: (I=0  C=0):  MC  clock frequency : 0.8 GHz
+src/process_manager.cc:455: (I=0  C=0):  setup_process:0 /home/jinku/macsim_traces/160810/16MB/trace.txt current_index:0 (1)
+src/process_manager.cc:548: (I=0  C=0):  thread_count:1
+1000000
+2000000
+3000000
+4000000
+5000000
+** Heartbeat for core[00]:        insts:10000000    cycles:13702130   (548085160) seconds:71    -- 0.73 IPC (0.73 IPC) -- 0.00 KIPS (140.85 KIPS)
+** Heartbeat for core[00]:  Thread:0      insts:10000000    cycles:13702130   (548085160) seconds:71    -- 0.73 IPC (0.73 IPC) -- 0.00 KIPS (140.85 KIPS)
+6000000
+7000000
+8000000
+9000000
+10000000
+10000000: 30m cycle
+total access:[145]
+0:4:0.460317
+11000000
+** Heartbeat for core[00]:        insts:20000000    cycles:26837396   (1073495800) seconds:146   -- 0.76 IPC (0.75 IPC) -- 133.33 KIPS (136.99 KIPS)
+** Heartbeat for core[00]:  Thread:0      insts:20000000    cycles:26837396   (1073495800) seconds:146   -- 0.76 IPC (0.75 IPC) -- 133.33 KIPS (136.99 KIPS)
+12000000
+13000000
+14000000
+15000000
+16000000
+17000000
+** Heartbeat for core[00]:        insts:30000000    cycles:39973005   (1598920160) seconds:227   -- 0.76 IPC (0.75 IPC) -- 123.46 KIPS (132.16 KIPS)
+** Heartbeat for core[00]:  Thread:0      insts:30000000    cycles:39973005   (1598920160) seconds:227   -- 0.76 IPC (0.75 IPC) -- 123.46 KIPS (132.16 KIPS)
+18000000
+19000000
+20000000
+20000000: 30m cycle
+total access:[10712]
+0:118:0.00900425
+21000000
+22000000
+** Heartbeat for core[00]:        insts:40000000    cycles:50918341   (2036733600) seconds:294   -- 0.91 IPC (0.79 IPC) -- 149.25 KIPS (136.05 KIPS)
+** Heartbeat for core[00]:  Thread:0      insts:40000000    cycles:50918341   (2036733600) seconds:294   -- 0.91 IPC (0.79 IPC) -- 149.25 KIPS (136.05 KIPS)
+23000000
+24000000
+25000000
+26000000
+27000000
+28000000
+** Heartbeat for core[00]:        insts:50000000    cycles:65749576   (2629983000) seconds:374   -- 0.67 IPC (0.76 IPC) -- 125.00 KIPS (133.69 KIPS)
+** Heartbeat for core[00]:  Thread:0      insts:50000000    cycles:65749576   (2629983000) seconds:374   -- 0.67 IPC (0.76 IPC) -- 125.00 KIPS (133.69 KIPS)
+29000000
+30000000
+30000000: 30m cycle
+total access:[116243]
+0:143:0.00889251
+31000000
+32000000
+33000000
+34000000
+35000000
+36000000
+** Heartbeat for core[00]:        insts:60000000    cycles:83060156   (3322406200) seconds:465   -- 0.58 IPC (0.72 IPC) -- 109.89 KIPS (129.03 KIPS)
+** Heartbeat for core[00]:  Thread:0      insts:60000000    cycles:83060156   (3322406200) seconds:465   -- 0.58 IPC (0.72 IPC) -- 109.89 KIPS (129.03 KIPS)
+37000000
+38000000
+39000000
+40000000
+40000000: 30m cycle
+total access:[199404]
+0:180:0.00886813
+41000000
+42000000
+43000000
+** Heartbeat for core[00]:        insts:70000000    cycles:100370467  (4014818640) seconds:563   -- 0.58 IPC (0.70 IPC) -- 102.04 KIPS (124.33 KIPS)
+** Heartbeat for core[00]:  Thread:0      insts:70000000    cycles:100370467  (4014818640) seconds:563   -- 0.58 IPC (0.70 IPC) -- 102.04 KIPS (124.33 KIPS)
+44000000
+45000000
+46000000
+**Core 00 Core_Total  Finished:   insts:77474965    cycles:107374184  (4294967320) seconds:608   -- 0.72 IPC (0.72 IPC) --  N/A  KHz (127.43 KHz)
+**Core 00 Thread 00 Finished:   insts:77474965    cycles:107374184  (4294967320)  seconds:608   -- 0.72 IPC (0.72 IPC) --  N/A  KHz (127.43 KHz) 
+src/macsim.cc:617: (I=77474965  C=4294967361):  finalize simulation
+src/macsim.cc:623: (I=77474965  C=4294967361):  elapsed time:607.4 seconds
+Done

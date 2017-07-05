@@ -1,0 +1,48 @@
+####################################################################################################
+Interval
+####################################################################################################
+Cumulative:         Cycles:                  20000     Instructions:                  1200
+DRAM_PRECHARGE                                              13603                         13603
+
+DRAM_ACTIVATE                                               13619                         13619
+
+DRAM_COLUMN                                                421538                        421538
+
+DRAM_AVG_LATENCY_BASE                                      421538                        421538
+
+DRAM_AVG_LATENCY                                         12914177                       30.6359
+
+BANDWIDTH_TOT                                            26978432                      26978432
+
+DRAM_CHANNEL0_BANDWIDTH_SATURATED                              15                            15
+
+DRAM_CHANNEL1_BANDWIDTH_SATURATED                             200                           200
+
+DRAM_CHANNEL2_BANDWIDTH_SATURATED                               7                             7
+
+DRAM_CHANNEL3_BANDWIDTH_SATURATED                              39                            39
+
+DRAM_CHANNEL4_BANDWIDTH_SATURATED                               0                             0
+
+DRAM_CHANNEL5_BANDWIDTH_SATURATED                              15                            15
+
+DRAM_CHANNEL6_BANDWIDTH_SATURATED                              40                            40
+
+DRAM_CHANNEL7_BANDWIDTH_SATURATED                               0                             0
+
+DRAM_CHANNEL0_DBUS_IDLE                                  36503575                      36503575
+
+DRAM_CHANNEL1_DBUS_IDLE                                  36501159                      36501159
+
+DRAM_CHANNEL2_DBUS_IDLE                                  36503431                      36503431
+
+DRAM_CHANNEL3_DBUS_IDLE                                  36504647                      36504647
+
+DRAM_CHANNEL4_DBUS_IDLE                                  36505847                      36505847
+
+DRAM_CHANNEL5_DBUS_IDLE                                  36505831                      36505831
+
+DRAM_CHANNEL6_DBUS_IDLE                                  36505303                      36505303
+
+DRAM_CHANNEL7_DBUS_IDLE                                  36505943                      36505943
+

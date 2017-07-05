@@ -1,0 +1,36 @@
+BP_MISPRED_STALL_CORE_0                                  52511889                      52511889
+
+BP_RESOLVED_CORE_0                                         358765                        358765
+
+BP_REDIRECT_RESOLVED_CORE_0                                     0                             0
+
+PERFECT_TARGET_PRED_CORE_0                                      0                             0
+
+BP_ON_PATH_CORRECT_CORE_0                                10584537                       96.7409%
+BP_ON_PATH_MISPREDICT_CORE_0                               356583                       3.25911%
+BP_ON_PATH_MISFETCH_CORE_0                                      0                             0%
+                                                         10941120                           100%
+
+BP_OFF_PATH_CORRECT_CORE_0                                      0                          NaN 
+BP_OFF_PATH_MISPREDICT_CORE_0                                   0                          NaN 
+BP_OFF_PATH_MISFETCH_CORE_0                                     0                          NaN 
+                                                                0                           100%
+
+BP_MISPRED_STALL_CORE_1                                    481282                        481282
+
+BP_RESOLVED_CORE_1                                           5029                          5029
+
+BP_REDIRECT_RESOLVED_CORE_1                                     0                             0
+
+PERFECT_TARGET_PRED_CORE_1                                      0                             0
+
+BP_ON_PATH_CORRECT_CORE_1                                 5648280                       99.9127%
+BP_ON_PATH_MISPREDICT_CORE_1                                 4934                     0.0872778%
+BP_ON_PATH_MISFETCH_CORE_1                                      0                             0%
+                                                          5653214                           100%
+
+BP_OFF_PATH_CORRECT_CORE_1                                      0                          NaN 
+BP_OFF_PATH_MISPREDICT_CORE_1                                   0                          NaN 
+BP_OFF_PATH_MISFETCH_CORE_1                                     0                          NaN 
+                                                                0                           100%
+
